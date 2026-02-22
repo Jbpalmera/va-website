@@ -18,7 +18,7 @@ const track = [...logos, ...logos];
 
 export default function TrustedBy() {
   return (
-    <section className="overflow-hidden border-y border-slate-100 bg-white py-10">
+    <section className="overflow-x-hidden border-y border-slate-100 bg-white py-10">
       <div className="mx-auto mb-8 max-w-[1350px] px-6 lg:px-8">
         <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
           Trusted by thousands of companies around the world
