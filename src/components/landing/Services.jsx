@@ -1,57 +1,49 @@
-import {
-  Mail, CalendarDays, Plane,
-  Search, ShoppingCart, FileSpreadsheet,
-  LayoutDashboard, Receipt, Timer,
-  ArrowRight,
-} from "lucide-react";
+import { Headphones, Scale, Home, ArrowRight, MessagesSquare, FileText, Users } from "lucide-react";
 
 const categories = [
   {
     label: "01",
-    title: "Communication\n& Scheduling",
-    tagline: "Never miss a meeting or message again",
+    title: "Client Support\n& Revenue Specialists",
+    tagline: "Strengthen relationships, improve response time, grow revenue",
     gradient: "from-slate-800 to-slate-700",
     accentBar: "bg-blue-500",
     lightBg: "bg-blue-50",
     lightText: "text-blue-600",
     borderAccent: "border-blue-100",
-    chipBg: "bg-blue-600/20",
     tasks: [
-      { icon: CalendarDays, label: "Calendar Management" },
-      { icon: Mail,         label: "Email & Call Handling" },
-      { icon: Plane,        label: "Travel Arrangements" },
+      { icon: Headphones, label: "Customer Support & Inbox Coverage" },
+      { icon: MessagesSquare, label: "Live Chat + Ticket Management" },
+      { icon: Users, label: "Follow-ups, Retention & Lead Support" },
     ],
   },
   {
     label: "02",
-    title: "Research &\nAdministrative",
-    tagline: "Insights and docs, ready when you need them",
+    title: "Specialized\nLegal Virtual Assistants",
+    tagline: "Structured legal admin support for fast-moving casework",
     gradient: "from-slate-800 to-slate-700",
     accentBar: "bg-indigo-500",
     lightBg: "bg-indigo-50",
     lightText: "text-indigo-600",
     borderAccent: "border-indigo-100",
-    chipBg: "bg-indigo-500/20",
     tasks: [
-      { icon: Search,          label: "Research & Reports" },
-      { icon: ShoppingCart,    label: "Order Products & Supplies" },
-      { icon: FileSpreadsheet, label: "Spreadsheets & Docs" },
+      { icon: FileText, label: "Intake, Documentation & Case Admin" },
+      { icon: MessagesSquare, label: "Client Communication & Scheduling" },
+      { icon: Scale, label: "Workflow Support for US Legal Practices" },
     ],
   },
   {
     label: "03",
-    title: "Business\nOperations",
-    tagline: "Keep your systems tight and running smooth",
+    title: "Real Estate\nVirtual Assistants",
+    tagline: "Stay organized, respond faster, and close deals easier",
     gradient: "from-slate-800 to-slate-700",
     accentBar: "bg-emerald-500",
     lightBg: "bg-emerald-50",
     lightText: "text-emerald-600",
     borderAccent: "border-emerald-100",
-    chipBg: "bg-emerald-500/20",
     tasks: [
-      { icon: LayoutDashboard, label: "CRM Updates" },
-      { icon: Receipt,         label: "Expenses & Invoicing" },
-      { icon: Timer,           label: "Billable Hours Tracking" },
+      { icon: Home, label: "Listing Coordination & Admin Support" },
+      { icon: Users, label: "Lead Management + CRM Updates" },
+      { icon: MessagesSquare, label: "Appointment Setting & Follow-ups" },
     ],
   },
 ];
@@ -80,18 +72,18 @@ export default function Services() {
       />
 
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
-
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          {/* <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            What We Handle
-          </span> */}
+            Our Services
+          </span>
+
           <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Tasks You Can{" "}
+            Specialized VA Support Built For{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Delegate Today
+                Growing Businesses
               </span>
               <span
                 aria-hidden
@@ -99,9 +91,11 @@ export default function Services() {
               />
             </span>
           </h2>
+
           <p className="mt-5 text-base leading-relaxed text-slate-500">
-            From inbox zero to CRM updates — your assistant is trained and ready
-            to take these off your plate from day one.
+            Eminence VA Solutions provides trained, reliable virtual assistants for
+            teams in the US and Canada — focused on customer support, legal workflows,
+            and real estate operations.
           </p>
         </div>
 
@@ -113,14 +107,16 @@ export default function Services() {
               className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-white shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${cat.borderAccent}`}
             >
               {/* Gradient header */}
-              <div className={`relative bg-gradient-to-br ${cat.gradient} px-7 pt-8 pb-12`}>
+              <div
+                className={`relative bg-gradient-to-br ${cat.gradient} px-7 pt-8 pb-12`}
+              >
                 {/* Number watermark */}
                 <span className="absolute right-4 top-3 text-7xl font-black leading-none text-white/10 select-none">
                   {cat.label}
                 </span>
 
-                {/* Icon row */}
-                <div className="flex items-center gap-2.5">
+                {/* Icon row (fixed height) */}
+                <div className="flex h-10 items-center gap-2.5">
                   {cat.tasks.map(({ icon: Icon }, i) => (
                     <div
                       key={i}
@@ -131,11 +127,17 @@ export default function Services() {
                   ))}
                 </div>
 
-                {/* Title & tagline */}
-                <h3 className="mt-5 whitespace-pre-line text-2xl font-extrabold leading-tight text-white">
-                  {cat.title}
-                </h3>
-                <p className="mt-1.5 text-sm text-white/70">{cat.tagline}</p>
+                {/* Title + tagline (fixed block height for alignment) */}
+                <div className="mt-5 min-h-[112px]">
+                  <h3 className="whitespace-pre-line text-2xl font-extrabold leading-tight text-white">
+                    {cat.title}
+                  </h3>
+
+                  {/* Force consistent 2-line area */}
+                  <p className="mt-2 text-sm leading-relaxed text-white/70 line-clamp-2 min-h-[40px]">
+                    {cat.tagline}
+                  </p>
+                </div>
               </div>
 
               {/* Wave cutout */}
@@ -146,19 +148,24 @@ export default function Services() {
                   className="absolute -top-5 left-0 h-10 w-full"
                   aria-hidden
                 >
-                  <path d="M0,20 C133,0 266,0 400,20 L400,20 L0,20 Z" className="fill-white" />
+                  <path
+                    d="M0,20 C133,0 266,0 400,20 L400,20 L0,20 Z"
+                    className="fill-white"
+                  />
                 </svg>
               </div>
 
               {/* Task list */}
-              <div className="flex flex-1 flex-col px-7 pb-7 pt-3">
+              <div className="flex flex-1 flex-col px-7 pb-7 pt-5">
                 <ul className="space-y-2.5">
                   {cat.tasks.map(({ icon: Icon, label }) => (
                     <li
                       key={label}
                       className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium text-slate-700 transition-all duration-200 ${cat.lightBg} ${cat.borderAccent}`}
                     >
-                      <span className={`flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-white shadow-sm ${cat.lightText}`}>
+                      <span
+                        className={`flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-white shadow-sm ${cat.lightText}`}
+                      >
                         <Icon className="h-3.5 w-3.5" strokeWidth={2.5} />
                       </span>
                       {label}
@@ -166,15 +173,20 @@ export default function Services() {
                   ))}
                 </ul>
 
-                {/* Hover CTA */}
-                <a
-                  href="#more-va"
-                  className={`mt-5 flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest opacity-0 transition-all duration-200 group-hover:opacity-100 ${cat.lightText}`}
-                >
-                  See more tasks
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
+                {/* CTA pinned to bottom for perfect alignment */}
+                <div className="mt-auto pt-5">
+                  <a
+                    href="#contact"
+                    className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest opacity-0 transition-all duration-200 group-hover:opacity-100 ${cat.lightText}`}
+                  >
+                    Book a Free Consultation
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
               </div>
+
+              {/* Bottom accent bar */}
+              <span className={`absolute bottom-0 left-0 h-1 w-full ${cat.accentBar} opacity-10`} />
             </div>
           ))}
         </div>
@@ -182,13 +194,13 @@ export default function Services() {
         {/* Bottom CTA */}
         <div className="mt-14 flex flex-col items-center gap-2.5">
           <p className="text-sm text-slate-400">
-            And much more — we cover 25+ task categories
+            Not sure which service fits? We’ll help you choose the right VA plan.
           </p>
           <a
-            href="#more-va"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-slate-700"
           >
-            View All Tasks
+            Get Matched With a VA
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>

@@ -4,18 +4,19 @@ const plans = [
   {
     icon: Users,
     name: "Starter",
-    price: "599",
-    hours: "40 hrs / month",
-    description: "Perfect for founders who need part-time support without the overhead.",
+    price: "Flexible",
+    hours: "Part-time support",
+    description:
+      "Ideal for founders who need dependable help a few hours a day — without hiring overhead.",
     features: [
       "1 dedicated assistant",
-      "40 hours per month",
-      "Email & calendar management",
-      "Task tracking dashboard",
-      "Slack & chat integration",
-      "Cancel anytime",
+      "Part-time monthly hours",
+      "Email & calendar support",
+      "Task tracking & reporting",
+      "Slack / chat coordination",
+      "Month-to-month flexibility",
     ],
-    cta: "Get Started",
+    cta: "Book a Free Consultation",
     highlighted: false,
     accentBar: "bg-slate-300",
     hoursBadge: "bg-slate-100 text-slate-600",
@@ -23,19 +24,20 @@ const plans = [
   {
     icon: Sparkles,
     name: "Professional",
-    price: "999",
-    hours: "Full-time · 160 hrs/mo",
-    description: "Our most popular plan for growing teams who need daily, reliable support.",
+    price: "Flexible",
+    hours: "Full-time support",
+    description:
+      "Best for growing teams that need daily, reliable execution and consistent coverage.",
     features: [
       "1 dedicated full-time assistant",
-      "160 hours per month",
-      "All Starter features",
+      "Full-time monthly hours",
+      "Everything in Starter",
       "Priority matching",
-      "Dedicated account manager",
-      "NDA & custom policies",
-      "Cancel anytime",
+      "Ongoing performance support",
+      "NDA available upon request",
+      "Month-to-month flexibility",
     ],
-    cta: "Get Started",
+    cta: "Get Matched With a VA",
     highlighted: true,
     badge: "Most Popular",
     accentBar: "bg-blue-400",
@@ -43,20 +45,21 @@ const plans = [
   },
   {
     icon: Building2,
-    name: "Enterprise",
+    name: "Business",
     price: "Custom",
     hours: "Multiple assistants",
-    description: "Tailored for agencies and scaling businesses with complex operational needs.",
+    description:
+      "For agencies and scaling businesses that need multiple roles, coverage, and operational structure.",
     features: [
       "Multiple assistants",
-      "24/7 team availability",
-      "Custom SLAs",
-      "End-to-end team management",
-      "Advanced security & compliance",
-      "Custom billing & invoicing",
-      "Dedicated success manager",
+      "Team-based coverage options",
+      "Custom workflows & SOP alignment",
+      "Account / operations support",
+      "Security-first processes",
+      "Custom billing options",
+      "Priority success support",
     ],
-    cta: "Contact Sales",
+    cta: "Talk to an Expert",
     highlighted: false,
     accentBar: "bg-indigo-400",
     hoursBadge: "bg-indigo-50 text-indigo-600",
@@ -80,17 +83,17 @@ export default function Pricing() {
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse 70% 50% at 50% 0%, #f8fafc 0%, transparent 100%)",
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, #f8fafc 0%, transparent 100%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
-
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            Simple Pricing
+            Flexible Plans
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Plans &{" "}
@@ -99,7 +102,8 @@ export default function Pricing() {
             </span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-500">
-            No surprise fees. No long-term lock-ins. Cancel anytime.
+            Pricing depends on role, hours, and specialization. Talk to us and we’ll
+            recommend the best-fit plan for your needs.
           </p>
         </div>
 
@@ -129,45 +133,67 @@ export default function Pricing() {
                 )}
 
                 <div className={`flex flex-col flex-1 p-8 ${plan.badge ? "pt-4" : "pt-8"}`}>
-
                   {/* Plan icon + name */}
                   <div className="mb-5 flex items-center gap-3">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${
-                      plan.highlighted ? "bg-blue-500/20 text-blue-300" : "bg-slate-100 text-slate-600"
-                    }`}>
-                      <Icon className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2} />
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-xl ${
+                        plan.highlighted
+                          ? "bg-blue-500/20 text-blue-300"
+                          : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
                     </div>
-                    <p className={`text-xs font-bold uppercase tracking-widest ${
-                      plan.highlighted ? "text-blue-300" : "text-slate-400"
-                    }`}>
+                    <p
+                      className={`text-xs font-bold uppercase tracking-widest ${
+                        plan.highlighted ? "text-blue-300" : "text-slate-400"
+                      }`}
+                    >
                       {plan.name}
                     </p>
                   </div>
 
                   {/* Price */}
-                  <div className="flex items-end gap-1">
+                  <div className="flex items-end gap-2">
                     {plan.price === "Custom" ? (
-                      <span className={`text-4xl font-extrabold ${plan.highlighted ? "text-white" : "text-slate-900"}`}>
+                      <span
+                        className={`text-4xl font-extrabold ${
+                          plan.highlighted ? "text-white" : "text-slate-900"
+                        }`}
+                      >
                         Custom
                       </span>
                     ) : (
-                      <>
-                        <span className={`text-xl font-bold leading-tight ${plan.highlighted ? "text-blue-300" : "text-slate-400"}`}>$</span>
-                        <span className={`text-5xl font-extrabold tracking-tight ${plan.highlighted ? "text-white" : "text-slate-900"}`}>
-                          {plan.price}
-                        </span>
-                        <span className={`mb-1.5 text-sm ${plan.highlighted ? "text-blue-300" : "text-slate-400"}`}>/mo</span>
-                      </>
+                      <span
+                        className={`text-4xl font-extrabold tracking-tight ${
+                          plan.highlighted ? "text-white" : "text-slate-900"
+                        }`}
+                      >
+                        Flexible
+                      </span>
                     )}
+                    <span
+                      className={`mb-1.5 text-sm ${
+                        plan.highlighted ? "text-blue-300" : "text-slate-400"
+                      }`}
+                    >
+                      pricing
+                    </span>
                   </div>
 
                   {/* Hours badge */}
-                  <span className={`mt-3 inline-flex w-fit rounded-full px-3 py-1 text-xs font-semibold ${plan.hoursBadge}`}>
+                  <span
+                    className={`mt-3 inline-flex w-fit rounded-full px-3 py-1 text-xs font-semibold ${plan.hoursBadge}`}
+                  >
                     {plan.hours}
                   </span>
 
                   {/* Description */}
-                  <p className={`mt-4 text-sm leading-relaxed ${plan.highlighted ? "text-slate-400" : "text-slate-500"}`}>
+                  <p
+                    className={`mt-4 text-sm leading-relaxed ${
+                      plan.highlighted ? "text-slate-300" : "text-slate-500"
+                    }`}
+                  >
                     {plan.description}
                   </p>
 
@@ -184,7 +210,7 @@ export default function Pricing() {
                           }`}
                           strokeWidth={2.5}
                         />
-                        <span className={`text-sm ${plan.highlighted ? "text-slate-300" : "text-slate-600"}`}>
+                        <span className={`text-sm ${plan.highlighted ? "text-slate-200" : "text-slate-600"}`}>
                           {f}
                         </span>
                       </li>
@@ -210,7 +236,7 @@ export default function Pricing() {
         </div>
 
         <p className="mt-8 text-center text-xs text-slate-400">
-          All plans include the Eminence VA Solutions Workspace App · No setup fees · Cancel anytime
+          Pricing varies by hours, role complexity, and specialization (Legal / Real Estate / Client Support).
         </p>
       </div>
     </section>

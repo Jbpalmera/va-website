@@ -1,4 +1,4 @@
-import heroImage from "../../assets/va-hero6.png";
+import heroImage from "../../assets/va-hero5.png";
 
 function CheckItem({ children }) {
   return (
@@ -15,39 +15,38 @@ export default function Hero() {
   return (
     <section className="bg-gradient-to-b from-slate-50 to-white overflow-hidden">
       <div className="mx-auto max-w-[1350px] px-5 sm:px-6 lg:px-8">
-
         {/* ── Mobile: stack vertically | Desktop: two columns ── */}
         <div className="flex flex-col items-center md:grid md:grid-cols-2 md:items-center lg:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-6 lg:gap-10 py-10 md:py-12 lg:py-16">
-
           {/* ── LEFT: Text content ─────────────────────────── */}
           <div className="w-full text-center md:text-left">
-
             {/* Badge */}
             <p className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-blue-600" />
-              Virtual Assistants for Modern Teams
+              Empowering Your Business with Elite Virtual Talent
             </p>
 
             {/* Headline */}
             <h1 className="mt-4 text-[1.75rem] leading-tight font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-              Trained, managed, and ready to work{" "}
+              Scale Your Business with Reliable{" "}
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                from day one
-              </span>
+                Virtual Assistant Support
+              </span>{" "}
+              You Can Trust
             </h1>
 
             {/* Subtext */}
-            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base md:text-base max-w-lg mx-auto md:mx-0">
-              Delegate admin, operations, research, and customer support to a
-              dedicated virtual assistant — without the stress of recruiting,
-              onboarding, or daily management.
+            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base md:text-base max-w-xl mx-auto md:mx-0">
+              Save time, reduce operational costs, and focus on growing your business
+              while our skilled virtual assistants handle your daily tasks with
+              precision and reliability — built for founders, startups, and growing
+              teams in the US and Canada.
             </p>
 
             {/* Check list */}
             <ul className="mt-6 space-y-2.5 text-left inline-flex flex-col">
-              <CheckItem>No setup, no training, no management required</CheckItem>
-              <CheckItem>70–80% more cost-efficient than traditional hires</CheckItem>
-              <CheckItem>Your assistant works exclusively for you</CheckItem>
+              <CheckItem>Reliable VAs trained for day-to-day business operations</CheckItem>
+              <CheckItem>Cost-effective support without full-time overhead</CheckItem>
+              <CheckItem>Flexible outsourcing that scales with your business</CheckItem>
             </ul>
 
             {/* CTAs */}
@@ -56,25 +55,24 @@ export default function Hero() {
                 href="#contact"
                 className="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
               >
-                Free Consultation
+                Book a Free Consultation
               </a>
               <a
-                href="#pricing"
+                href="#services"
                 className="rounded-full border bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
               >
-                Plans & Pricing
+                Explore Services
               </a>
             </div>
 
-            {/* Rating strip */}
+            {/* Trust strip */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-500 md:justify-start">
-              <span className="font-semibold text-slate-700">RATED</span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="text-amber-500">★★★★★</span>
-                4.8/5 average reviews
-              </span>
+              <span className="font-semibold text-slate-700">SERVING</span>
+              <span>US & Canada businesses</span>
               <span className="hidden sm:inline text-slate-400">·</span>
-              <span className="hidden sm:inline">Trusted by founders, agencies & teams</span>
+              <span className="hidden sm:inline">
+                Built for founders, startups & growing teams
+              </span>
             </div>
           </div>
 
@@ -86,7 +84,7 @@ export default function Hero() {
 
             <img
               src={heroImage}
-              alt="Virtual assistant"
+              alt="Eminence VA Solutions virtual assistant support"
               className="
                 w-full
                 max-w-[260px]
@@ -100,7 +98,6 @@ export default function Hero() {
               "
             />
           </div>
-
         </div>
       </div>
     </section>

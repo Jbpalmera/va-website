@@ -1,97 +1,96 @@
 import {
-  Home, Stethoscope, User, Briefcase,
-  Megaphone, Phone, BookOpen, Headphones,
+  MessagesSquare,
+  Headphones,
+  BadgeDollarSign,
+  FileText,
+  ClipboardList,
+  CalendarDays,
+  Home,
+  LayoutDashboard,
+  PhoneCall,
   ArrowRight,
 } from "lucide-react";
 
 const services = [
   {
-    icon: Home,
-    title: "Real Estate Assistant",
-    description: "Property listings, client follow-ups, and scheduling handled end-to-end.",
+    icon: Headphones,
+    title: "Customer Support Coverage",
+    description: "Handle tickets, inboxes, and chats with fast, professional responses.",
     accentColor: "text-blue-600",
     accentBg: "bg-blue-50",
     accentBorder: "border-blue-100",
-    accentHover: "group-hover:bg-blue-600",
     badgeBg: "bg-blue-100 text-blue-700",
     bar: "bg-blue-500",
   },
   {
-    icon: Stethoscope,
-    title: "Healthcare Assistant",
-    description: "Coordinate appointments, data-entry, and insurance filing with ease.",
-    accentColor: "text-emerald-600",
-    accentBg: "bg-emerald-50",
-    accentBorder: "border-emerald-100",
-    accentHover: "group-hover:bg-emerald-600",
-    badgeBg: "bg-emerald-100 text-emerald-700",
-    bar: "bg-emerald-500",
-  },
-  {
-    icon: User,
-    title: "Personal Assistant",
-    description: "Manages your calendar both at work and outside of it, around the clock.",
-    accentColor: "text-violet-600",
-    accentBg: "bg-violet-50",
-    accentBorder: "border-violet-100",
-    accentHover: "group-hover:bg-violet-600",
-    badgeBg: "bg-violet-100 text-violet-700",
-    bar: "bg-violet-500",
-  },
-  {
-    icon: Briefcase,
-    title: "Executive Assistant",
-    description: "Expert-tier talent for presentations, proposals, and high-level tasks.",
-    accentColor: "text-slate-700",
-    accentBg: "bg-slate-100",
-    accentBorder: "border-slate-200",
-    accentHover: "group-hover:bg-slate-700",
-    badgeBg: "bg-slate-200 text-slate-700",
-    bar: "bg-slate-600",
-  },
-  {
-    icon: Megaphone,
-    title: "Digital Marketing VA",
-    description: "Experts in PPC ads, email marketing, social media, and growth strategies.",
-    accentColor: "text-rose-600",
-    accentBg: "bg-rose-50",
-    accentBorder: "border-rose-100",
-    accentHover: "group-hover:bg-rose-600",
-    badgeBg: "bg-rose-100 text-rose-700",
-    bar: "bg-rose-500",
-  },
-  {
-    icon: Phone,
-    title: "Sales Development Rep",
-    description: "Engages prospects, grows your pipeline, and drives consistent revenue.",
+    icon: BadgeDollarSign,
+    title: "Revenue & Follow-Up Support",
+    description: "Lead follow-ups, client retention, and pipeline support to drive growth.",
     accentColor: "text-amber-600",
     accentBg: "bg-amber-50",
     accentBorder: "border-amber-100",
-    accentHover: "group-hover:bg-amber-600",
     badgeBg: "bg-amber-100 text-amber-700",
     bar: "bg-amber-500",
   },
   {
-    icon: BookOpen,
-    title: "Bookkeeping Assistant",
-    description: "Tracks expenses, maintains your books, and reconciles statements monthly.",
+    icon: FileText,
+    title: "Legal Documentation Support",
+    description: "Organize case files, manage documents, and support legal admin workflows.",
+    accentColor: "text-indigo-600",
+    accentBg: "bg-indigo-50",
+    accentBorder: "border-indigo-100",
+    badgeBg: "bg-indigo-100 text-indigo-700",
+    bar: "bg-indigo-500",
+  },
+  {
+    icon: ClipboardList,
+    title: "Client Intake & Admin",
+    description: "Streamline intake, scheduling, forms, and client communications.",
+    accentColor: "text-violet-600",
+    accentBg: "bg-violet-50",
+    accentBorder: "border-violet-100",
+    badgeBg: "bg-violet-100 text-violet-700",
+    bar: "bg-violet-500",
+  },
+  {
+    icon: Home,
+    title: "Listing & Transaction Support",
+    description: "Coordinate listings, manage paperwork, and keep deals moving forward.",
+    accentColor: "text-emerald-600",
+    accentBg: "bg-emerald-50",
+    accentBorder: "border-emerald-100",
+    badgeBg: "bg-emerald-100 text-emerald-700",
+    bar: "bg-emerald-500",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "CRM + Lead Management",
+    description: "Update CRMs, track prospects, follow up, and maintain clean pipelines.",
     accentColor: "text-cyan-600",
     accentBg: "bg-cyan-50",
     accentBorder: "border-cyan-100",
-    accentHover: "group-hover:bg-cyan-600",
     badgeBg: "bg-cyan-100 text-cyan-700",
     bar: "bg-cyan-500",
   },
   {
-    icon: Headphones,
-    title: "Customer Service Rep",
-    description: "Responsive, professional support for queries, complaints, and feedback.",
-    accentColor: "text-indigo-600",
-    accentBg: "bg-indigo-50",
-    accentBorder: "border-indigo-100",
-    accentHover: "group-hover:bg-indigo-600",
-    badgeBg: "bg-indigo-100 text-indigo-700",
-    bar: "bg-indigo-500",
+    icon: CalendarDays,
+    title: "Scheduling & Coordination",
+    description: "Appointment setting, calendar organization, and meeting coordination.",
+    accentColor: "text-slate-700",
+    accentBg: "bg-slate-100",
+    accentBorder: "border-slate-200",
+    badgeBg: "bg-slate-200 text-slate-700",
+    bar: "bg-slate-600",
+  },
+  {
+    icon: PhoneCall,
+    title: "Call Handling & Outreach",
+    description: "Professional call support, outbound follow-ups, and appointment booking.",
+    accentColor: "text-rose-600",
+    accentBg: "bg-rose-50",
+    accentBorder: "border-rose-100",
+    badgeBg: "bg-rose-100 text-rose-700",
+    bar: "bg-rose-500",
   },
 ];
 
@@ -112,27 +111,27 @@ export default function MoreServices() {
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse 80% 40% at 50% 0%, white 0%, transparent 100%)",
+          background:
+            "radial-gradient(ellipse 80% 40% at 50% 0%, white 0%, transparent 100%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
-
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            25+ Specialized Plans
+            What Your VA Can Handle
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            More Virtual Assistant{" "}
+            Support That Fits Your{" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Services
+              Workflow
             </span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-500">
-            We offer 25+ distinct plans across sales, marketing, customer service,
-            and operations. Speak to an expert to find your perfect fit.
+            From client support to specialized admin workflows, our assistants help
+            reduce bottlenecks and keep your operations moving.
           </p>
         </div>
 
@@ -170,7 +169,7 @@ export default function MoreServices() {
                   href="#contact"
                   className={`inline-flex items-center gap-1.5 self-start rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${s.badgeBg} hover:gap-2.5`}
                 >
-                  Book a Call
+                  Book a Free Call
                   <ArrowRight className="h-3 w-3" />
                 </a>
 
@@ -186,10 +185,10 @@ export default function MoreServices() {
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
           <a
-            href="#services"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-slate-700"
           >
-            View All Services
+            Talk to an Expert
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>

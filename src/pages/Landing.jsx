@@ -13,6 +13,7 @@ import Footer from "../components/landing/Footer";
 import FloatingChat from "../components/FloatingChat";
 import BackToTop from "../components/BackToTop";
 import PromoBar from "../components/landing/PromoBar";
+import Contact from "../components/landing/Contact";
 import About from "../components/landing/About";
 export default function Landing() {
   return (
@@ -33,6 +34,7 @@ export default function Landing() {
       <WhyChooseUs />
       <Pricing />
       <CTA />
+      <Contact />  
       <Footer />
       <FloatingChat />
       <BackToTop />
