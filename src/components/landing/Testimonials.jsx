@@ -26,7 +26,7 @@ const testimonials = [
     quoteText: "text-violet-500",
   },
   {
-    quote: "YOURBRAND general and executive assistants are extremely talented and affordable. Best decision we made for our growing team.",
+    quote: "Eminence VA Solutions general and executive assistants are extremely talented and affordable. Best decision we made for our growing team.",
     name: "Andrew Wolfe",
     company: "Drone Brothers",
     initials: "AW",

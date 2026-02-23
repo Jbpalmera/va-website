@@ -13,7 +13,8 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-xl bg-white/10" />
-              <span className="text-base font-bold text-white">YourBrand</span>
+              <span className="text-base font-bold text-white">
+Eminence VA Solutions</span>
             </div>
             <p className="text-sm leading-relaxed">
               Trained, managed virtual assistants ready to work from day one. No recruiting,
@@ -52,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-8 sm:flex-row">
-          <p className="text-xs">© {new Date().getFullYear()} YourBrand. All rights reserved.</p>
+          <p className="text-xs">© {new Date().getFullYear()} Eminence VA Solutions. All rights reserved.</p>
           <div className="flex gap-5 text-xs">
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
             <a href="#" className="hover:text-white transition">Terms of Service</a>

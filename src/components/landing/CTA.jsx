@@ -47,7 +47,7 @@ export default function CTA() {
               </h2>
 
               <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-400">
-                Talk to a YourBrand expert, tell us what you need, and we'll match you with
+                Talk to a Eminence VA Solutions expert, tell us what you need, and we'll match you with
                 the perfect virtual assistant — no obligation, no credit card required.
               </p>
 

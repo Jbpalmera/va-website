@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
           {/* Left */}
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
-              Why YOURBRAND
+              Why Eminence VA Solutions?
             </p>
             <h2 className="mb-5 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Why You Should Choose Us

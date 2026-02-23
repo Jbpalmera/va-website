@@ -210,7 +210,7 @@ export default function Pricing() {
         </div>
 
         <p className="mt-8 text-center text-xs text-slate-400">
-          All plans include the YourBrand Workspace App · No setup fees · Cancel anytime
+          All plans include the Eminence VA Solutions Workspace App · No setup fees · Cancel anytime
         </p>
       </div>
     </section>

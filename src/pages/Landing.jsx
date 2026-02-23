@@ -13,6 +13,7 @@ import Footer from "../components/landing/Footer";
 import FloatingChat from "../components/FloatingChat";
 import BackToTop from "../components/BackToTop";
 import PromoBar from "../components/landing/PromoBar";
+import About from "../components/landing/About";
 export default function Landing() {
   return (
     <div className="min-h-screen">
@@ -20,6 +21,7 @@ export default function Landing() {
       <Navbar />
       <main>
         <Hero />
+        {/* <About /> */}
       </main>
 
       <TrustedBy />
