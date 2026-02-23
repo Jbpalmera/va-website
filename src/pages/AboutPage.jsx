@@ -99,7 +99,7 @@ export default function AboutPage() {
                 <img
   src={cooImage}
   alt="Mark Jhon MJ Vallena - COO of Eminence VA Solutions"
-  className="w-[380px] h-[480px] object-cover rounded-2xl shadow-xl mx-auto"
+  className="w-[380px] h-[480px] object-cover object-top rounded-2xl shadow-xl mx-auto"
 />
               </div>
 
