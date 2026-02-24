@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
+import logo from "../../assets/logo.png"; // adjust if needed
+
 const navLinks = [
+  { label: "Home", href: "/" },          // ✅ NEW
   { label: "Services", href: "#services" },
   { label: "About", href: "/about" },
   { label: "Use Cases", href: "#usecases" },
@@ -12,7 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(""); // "services", "pricing", etc.
+  const [activeSection, setActiveSection] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +37,6 @@ export default function Navbar() {
 
     const io = new IntersectionObserver(
       (entries) => {
-        // Pick the most visible intersecting section
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
@@ -43,7 +45,6 @@ export default function Navbar() {
       },
       {
         root: null,
-        // tweak this if your navbar height differs
         rootMargin: "-30% 0px -60% 0px",
         threshold: [0.1, 0.25, 0.5],
       }
@@ -53,52 +54,76 @@ export default function Navbar() {
     return () => io.disconnect();
   }, [location.pathname, sectionIds]);
 
+  const handleHomeNav = () => {
+    setMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      // scroll after route change
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleSectionNav = (hash) => {
     const id = hash.replace("#", "");
     setMenuOpen(false);
 
-    // If NOT on landing page, go home with hash; Landing page will scroll on mount
+    // If NOT on landing page, go home with hash; landing will scroll on mount
     if (location.pathname !== "/") {
       navigate({ pathname: "/", hash });
       return;
     }
 
-    // If already on landing, smooth scroll immediately
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const linkBase =
-    "text-slate-600 transition hover:text-slate-900";
-  const linkActive =
-    "text-slate-900 font-semibold";
+  // Desktop styles
+  const linkBase = "text-slate-600 transition hover:text-slate-900";
+  const linkActive = "text-slate-900 font-semibold";
 
-  const mobileLinkBase =
-    "border-b border-slate-100 py-3.5 text-sm font-medium text-slate-700 transition hover:text-slate-900 last:border-0";
-  const mobileLinkActive =
-    "text-slate-900";
+  // Mobile styles — unified for ALL items
+  const mobileItemBase =
+    "w-full text-left flex items-center justify-between border-b border-slate-100 py-4 text-sm font-medium text-slate-700 transition hover:text-slate-900 last:border-0";
+  const mobileItemActive = "text-slate-900 font-semibold";
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1350px] items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-        {/* Logo (go home + smooth scroll top) */}
-        <Link
-          to="/"
-          onClick={() => {
-            setMenuOpen(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          className="flex items-center gap-2"
+        {/* Logo (Home) */}
+        <button
+          type="button"
+          onClick={handleHomeNav}
+          className="flex items-center gap-3"
         >
-          <div className="h-9 w-9 rounded-xl bg-slate-900" />
-          <span className="text-base font-bold text-slate-900">
-            Eminence VA Solutions
-          </span>
-        </Link>
+          <img
+            src={logo}
+            alt="Eminence VA Solutions"
+            className="h-9 w-auto object-contain"
+          />
+        </button>
 
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-6 text-sm md:flex">
           {navLinks.map((link) => {
+            // Home
+            if (link.href === "/") {
+              const isHomeActive = location.pathname === "/";
+              return (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={handleHomeNav}
+                  className={`${linkBase} ${isHomeActive ? linkActive : ""}`}
+                >
+                  {link.label}
+                </button>
+              );
+            }
+
             // Route link (/about)
             if (link.href.startsWith("/")) {
               return (
@@ -151,6 +176,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:hidden">
           <a
             href="#contact"
+            onClick={() => setMenuOpen(false)}
             className="rounded-lg bg-slate-900 px-4 py-2 text-xs font-medium text-white transition hover:bg-slate-700"
           >
             Get Started
@@ -159,6 +185,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen((prev) => !prev)}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-700 transition hover:bg-slate-100"
             aria-label="Toggle menu"
+            type="button"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -168,9 +195,24 @@ export default function Navbar() {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="border-t border-slate-100 bg-white/95 backdrop-blur-md md:hidden">
-          <nav className="mx-auto flex max-w-[1350px] flex-col px-5 py-4 sm:px-6">
+          <nav className="mx-auto flex max-w-[1350px] flex-col px-5 py-3 sm:px-6">
             {navLinks.map((link) => {
-              // Route link
+              // Home (button)
+              if (link.href === "/") {
+                const isHomeActive = location.pathname === "/";
+                return (
+                  <button
+                    key={link.label}
+                    type="button"
+                    onClick={handleHomeNav}
+                    className={`${mobileItemBase} ${isHomeActive ? mobileItemActive : ""}`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
+
+              // Route link (/about)
               if (link.href.startsWith("/")) {
                 return (
                   <NavLink
@@ -178,7 +220,7 @@ export default function Navbar() {
                     to={link.href}
                     onClick={() => setMenuOpen(false)}
                     className={({ isActive }) =>
-                      `${mobileLinkBase} ${isActive ? mobileLinkActive : ""}`
+                      `${mobileItemBase} ${isActive ? mobileItemActive : ""}`
                     }
                   >
                     {link.label}
@@ -194,7 +236,7 @@ export default function Navbar() {
                 <button
                   key={link.label}
                   onClick={() => handleSectionNav(link.href)}
-                  className={`${mobileLinkBase} ${isActiveSection ? mobileLinkActive : ""}`}
+                  className={`${mobileItemBase} ${isActiveSection ? mobileItemActive : ""}`}
                   type="button"
                 >
                   {link.label}
@@ -202,11 +244,11 @@ export default function Navbar() {
               );
             })}
 
-            {/* Sign In */}
+            {/* Sign In — aligned like other links */}
             <a
               href="#signin"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 pt-2 text-sm font-medium text-slate-500 transition hover:text-slate-900"
+              className={`${mobileItemBase} border-b-0`}
             >
               Sign In
             </a>

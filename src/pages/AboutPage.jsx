@@ -3,31 +3,44 @@ import Footer from "../components/landing/Footer";
 import FloatingChat from "../components/FloatingChat";
 import BackToTop from "../components/BackToTop";
 
-import cooImage from "../assets/coo.jpeg"; // Adjust path if needed
+import logo from "../assets/logo.png";
+import ceoImage from "../assets/ceo.png";
+import cooImage from "../assets/coo.jpeg";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <main className="pt-24">
-        {/* ================= Mission & Vision Section ================= */}
-        <section className="bg-white py-20 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-            
-            <div className="mx-auto max-w-2xl text-center">
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                About Eminence VA Solutions
-              </h1>
-              <p className="mt-4 text-lg text-slate-600">
-                We help founders, startups, and growing businesses delegate smarter,
-                operate faster, and scale without hiring full-time overhead.
-              </p>
-            </div>
+      <main>
 
-            <div className="mt-16 grid gap-12 md:grid-cols-2 md:items-center">
-              
-              {/* Left Content */}
+        {/* ================= HERO SECTION ================= */}
+        <section className="bg-white pt-20 pb-16 sm:pt-24 sm:pb-20">
+          <div className="mx-auto max-w-[1200px] px-6 lg:px-8 text-center">
+
+            {/* Bigger Logo */}
+            <img
+              src={logo}
+              alt="Eminence VA Solutions Logo"
+              className="mx-auto mb-10 w-72 sm:w-96 object-contain"
+            />
+
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              About Eminence VA Solutions
+            </h1>
+
+            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+              We help founders, startups, and growing businesses delegate smarter,
+              operate faster, and scale without hiring full-time overhead.
+            </p>
+          </div>
+        </section>
+
+        {/* ================= Mission & Vision ================= */}
+        <section className="bg-white py-20 sm:py-24 border-t border-slate-100">
+          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+            <div className="grid gap-12 md:grid-cols-2 md:items-center">
+
               <div>
                 <h3 className="text-xl font-semibold text-slate-900">
                   Our Mission
@@ -38,7 +51,7 @@ export default function AboutPage() {
                   workflow. We remove operational bottlenecks so you can focus on growth.
                 </p>
 
-                <h3 className="mt-8 text-xl font-semibold text-slate-900">
+                <h3 className="mt-10 text-xl font-semibold text-slate-900">
                   Our Vision
                 </h3>
                 <p className="mt-4 leading-relaxed text-slate-600">
@@ -49,10 +62,12 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Right Visual Block */}
-              <div className="rounded-2xl bg-slate-100 p-8">
-                <div className="aspect-video w-full rounded-xl bg-slate-200" />
+              <div className="rounded-2xl bg-slate-50 p-10 shadow-sm text-center">
+                <p className="text-xl font-semibold text-slate-900">
+                  Structured Systems. Elite Virtual Talent.
+                </p>
               </div>
+
             </div>
           </div>
         </section>
@@ -62,27 +77,37 @@ export default function AboutPage() {
           <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
 
-              {/* Content */}
+              {/* Content LEFT */}
               <div>
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                  Chief Executive Officer
+                  Ramy Alsaeed
                 </h2>
-                <p className="mt-6 leading-relaxed text-slate-600">
-                  Our CEO leads Eminence VA Solutions with a strong vision for
-                  scalable growth and operational excellence. With a focus on
-                  innovation, client success, and long-term partnerships, the
-                  company continues to expand its impact across industries.
+
+                <p className="mt-2 text-lg font-medium text-slate-600">
+                  Chief Executive Officer
                 </p>
+
+                <p className="mt-6 leading-relaxed text-slate-600">
+                  As the Chief Executive Officer of Eminence VA Solutions, Ramy leads the company 
+                  with a clear vision for scalable growth and operational excellence. His focus 
+                  on innovation, structured systems, and client success drives the company’s 
+                  continued expansion across industries.
+                </p>
+
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  By combining strategic leadership with a deep understanding
-                  of modern business challenges, our CEO ensures that every
-                  client receives exceptional value and measurable results.
+                  With a strong understanding of modern business challenges, Ramy ensures that 
+                  every partnership delivers measurable value. His leadership emphasizes 
+                  accountability, performance, and building long-term client relationships.
                 </p>
               </div>
 
-              {/* Placeholder Image Block */}
-              <div className="rounded-2xl bg-white p-8 shadow-md">
-                <div className="aspect-square w-full rounded-xl bg-slate-200" />
+              {/* Image RIGHT */}
+              <div>
+                <img
+                  src={ceoImage}
+                  alt="Ramy Alsaeed - CEO of Eminence VA Solutions"
+                  className="w-[420px] h-[520px] object-cover object-top rounded-2xl shadow-xl mx-auto"
+                />
               </div>
 
             </div>
@@ -90,24 +115,25 @@ export default function AboutPage() {
         </section>
 
         {/* ================= COO Section ================= */}
-        <section className="bg-white py-20 sm:py-24">
+        <section className="bg-white py-20 sm:py-24 border-t border-slate-100">
           <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
 
-              {/* Image */}
+              {/* Image LEFT */}
               <div>
                 <img
-  src={cooImage}
-  alt="Mark Jhon MJ Vallena - COO of Eminence VA Solutions"
-  className="w-[380px] h-[480px] object-cover object-top rounded-2xl shadow-xl mx-auto"
-/>
+                  src={cooImage}
+                  alt="Mark Jhon MJ Vallena - COO of Eminence VA Solutions"
+                  className="w-[420px] h-[520px] object-cover object-top rounded-2xl shadow-xl mx-auto"
+                />
               </div>
 
-              {/* Content */}
+              {/* Content RIGHT */}
               <div>
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
                   Mark Jhon “MJ” Vallena
                 </h2>
+
                 <p className="mt-2 text-lg font-medium text-slate-600">
                   Chief Operating Officer
                 </p>
@@ -122,14 +148,7 @@ export default function AboutPage() {
                 <p className="mt-4 leading-relaxed text-slate-600">
                   With extensive experience in operations management and structured 
                   process development, MJ builds scalable systems that allow the company 
-                  to grow without compromising service excellence. He works closely with 
-                  both clients and virtual assistants to ensure seamless integration and 
-                  measurable outcomes.
-                </p>
-
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  His commitment to accountability, structure, and continuous improvement 
-                  plays a key role in transforming strategic goals into operational success.
+                  to grow without compromising service excellence.
                 </p>
               </div>
 
