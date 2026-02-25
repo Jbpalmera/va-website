@@ -36,7 +36,7 @@ export default function Landing() {
       <WhyChooseUs />
       <Pricing />
       <CTA />
-      <Contact />  
+      {/* <Contact />   */}
       <Footer />
       <FloatingChat />
       <BackToTop />

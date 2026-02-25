@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
 import LoadingWithLogo from "../components/ui/LoadingWithLogo";
-
+import Contact from "../components/landing/Contact"; // <-- adjust path if yours is different
 
 function startOfDay(d) {
   const x = new Date(d);
@@ -26,13 +26,11 @@ function formatTime(date) {
  * Replace this with your API call later.
  */
 function buildSlotsForDate(date, tz = Intl.DateTimeFormat().resolvedOptions().timeZone) {
-  // Example: 6 slots starting 11:00 AM every 45 mins
   const base = new Date(date);
   base.setHours(11, 0, 0, 0);
 
   const slots = [];
-  const incrementsMins = [0, 90, 135, 150, 165, 180]; // matches screenshot-ish spacing
-  // If you want clean 30-min increments, use: for (let i=0; i<10; i++) slot = base + i*30mins
+  const incrementsMins = [0, 90, 135, 150, 165, 180];
 
   for (let i = 0; i < incrementsMins.length; i++) {
     const s = new Date(base.getTime() + incrementsMins[i] * 60 * 1000);
@@ -58,10 +56,11 @@ export default function SchedulePage() {
 
   const [selectedDate, setSelectedDate] = useState(null);
 
-  // NEW: time slots state
   const [slotsLoading, setSlotsLoading] = useState(false);
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedSlotId, setSelectedSlotId] = useState(null);
+
+  const contactRef = useRef(null);
 
   const timezone = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -84,10 +83,8 @@ export default function SchedulePage() {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
 
-    // 0=Sun..6=Sat
     const startWeekday = firstDay.getDay();
 
-    // days array includes blanks at start
     const days = [];
     for (let i = 0; i < startWeekday; i++) days.push(null);
 
@@ -112,7 +109,7 @@ export default function SchedulePage() {
     setTimeSlots([]);
   };
 
-  // NEW: when date changes, "load" slots
+  // Load slots when a date is selected
   useEffect(() => {
     if (!selectedDate) return;
 
@@ -136,6 +133,20 @@ export default function SchedulePage() {
       year: "numeric",
     });
   }, [selectedDate]);
+
+  const selectedSlot = useMemo(() => {
+    if (!selectedSlotId) return null;
+    return timeSlots.find((s) => s.id === selectedSlotId) || null;
+  }, [selectedSlotId, timeSlots]);
+
+  // Scroll to contact once time is selected
+  useEffect(() => {
+    if (!selectedSlotId) return;
+    const t = setTimeout(() => {
+      contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => clearTimeout(t);
+  }, [selectedSlotId]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -188,12 +199,10 @@ export default function SchedulePage() {
                     {selectedDateLabel}
                   </p>
 
-                  {selectedSlotId ? (
+                  {selectedSlot ? (
                     <p className="mt-2 text-sm text-slate-700">
                       Selected time:{" "}
-                      <span className="font-semibold">
-                        {timeSlots.find((s) => s.id === selectedSlotId)?.label}
-                      </span>{" "}
+                      <span className="font-semibold">{selectedSlot.label}</span>{" "}
                       ({timezone})
                     </p>
                   ) : (
@@ -208,10 +217,9 @@ export default function SchedulePage() {
             {/* Right calendar/time card */}
             <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
               {loading ? (
-  <LoadingWithLogo className="py-20" />
-) : (
+                <LoadingWithLogo className="py-20" />
+              ) : (
                 <>
-                  {/* If no date selected: show calendar. If selected: show times (Wing-style). */}
                   {!selectedDate ? (
                     <>
                       <div className="text-center">
@@ -244,14 +252,12 @@ export default function SchedulePage() {
                         </div>
                       </div>
 
-                      {/* Week headers */}
                       <div className="mt-8 grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-500">
                         {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((d) => (
                           <div key={d}>{d}</div>
                         ))}
                       </div>
 
-                      {/* Dates */}
                       <div className="mt-3 grid grid-cols-7 gap-2">
                         {calendarDays.map((d, idx) => {
                           if (!d) return <div key={`blank-${idx}`} />;
@@ -324,14 +330,12 @@ export default function SchedulePage() {
                         <p className="text-lg font-extrabold text-slate-900">
                           Select a Time
                         </p>
-                        <p className="mt-1 text-sm text-slate-600">
-                          Duration: 20 min
-                        </p>
+                        <p className="mt-1 text-sm text-slate-600">Duration: 20 min</p>
                       </div>
 
                       {slotsLoading ? (
-  <LoadingWithLogo className="py-10" logoSize={50} dotSize={8} />
-) : (
+                        <LoadingWithLogo className="py-10" logoSize={50} dotSize={8} />
+                      ) : (
                         <div className="mt-6 max-h-[420px] space-y-3 overflow-auto pr-2">
                           {timeSlots.map((slot) => {
                             const active = slot.id === selectedSlotId;
@@ -354,11 +358,17 @@ export default function SchedulePage() {
                         </div>
                       )}
 
-                      {/* Optional: next button when time selected */}
                       <div className="mt-6">
                         <button
                           type="button"
                           disabled={!selectedSlotId}
+                          onClick={() => {
+                            // Optional: click "Continue" should also scroll to form
+                            contactRef.current?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                          }}
                           className={[
                             "w-full rounded-2xl px-5 py-3 text-sm font-semibold transition",
                             selectedSlotId
@@ -375,6 +385,30 @@ export default function SchedulePage() {
               )}
             </div>
           </div>
+
+          {/* CONTACT appears AFTER date + time selection */}
+          {selectedDate && selectedSlot && (
+            <div ref={contactRef} className="mt-10">
+              <div className="mb-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                  Booking summary
+                </p>
+                <p className="mt-2 text-lg font-extrabold text-slate-900">
+                  {selectedDateLabel}
+                </p>
+                <p className="mt-1 text-sm text-slate-600">
+                  Time:{" "}
+                  <span className="font-semibold text-slate-800">
+                    {selectedSlot.label}
+                  </span>{" "}
+                  ({timezone})
+                </p>
+              </div>
+
+              {/* Render your Contact form section */}
+              <Contact />
+            </div>
+          )}
         </div>
       </main>
 
