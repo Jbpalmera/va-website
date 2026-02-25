@@ -3,7 +3,7 @@ import Footer from "../components/landing/Footer";
 import FloatingChat from "../components/FloatingChat";
 import BackToTop from "../components/BackToTop";
 
-import logo from "../assets/logo.png";
+import logo from "../assets/logo1.png";
 import ceoImage from "../assets/ceo.png";
 import cooImage from "../assets/coo.jpeg";
 
