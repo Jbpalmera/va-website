@@ -15,6 +15,7 @@ import BackToTop from "../components/BackToTop";
 import PromoBar from "../components/landing/PromoBar";
 import Contact from "../components/landing/Contact";
 import About from "../components/landing/About";
+import PromoVideo from "../components/landing/PromoVideo";
 export default function Landing() {
   return (
     <div className="min-h-screen">
@@ -23,6 +24,7 @@ export default function Landing() {
       <main>
         <Hero />
         {/* <About /> */}
+        {/* <PromoVideo /> */}
       </main>
 
       <TrustedBy />
