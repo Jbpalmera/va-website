@@ -80,7 +80,7 @@ export default function AboutPage() {
               {/* Content LEFT */}
               <div>
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                  Ramy Alsaeed
+                  Ramy Elsaeed
                 </h2>
 
                 <p className="mt-2 text-lg font-medium text-slate-600">

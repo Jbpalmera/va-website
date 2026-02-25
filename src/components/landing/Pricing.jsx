@@ -46,7 +46,7 @@ const plans = [
       {
         key: "starter-weekly",
         label: "Weekly",
-        value: "$299/week",
+        value: "Start at $349/week",
         bestFor: "Founders who need consistent weekly coverage without full-time commitment.",
         details: [
           "Consistent weekly coverage",
@@ -58,7 +58,7 @@ const plans = [
       {
         key: "starter-monthly",
         label: "Monthly",
-        value: "$1499/month",
+        value: " Start at $999/month",
         bestFor: "Best value for stable part-time support and steady execution.",
         details: [
           "Best value for steady part-time support",
