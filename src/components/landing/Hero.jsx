@@ -1,6 +1,5 @@
 import heroImage from "../../assets/va-hero7.png";
-import heroVideo from "../../assets/prom-video.mov";
-
+import heroVideo from "../../assets/prom-video.mp4";
 function CheckItem({ children }) {
   return (
     <li className="flex gap-3">
@@ -17,7 +16,7 @@ export default function Hero() {
     <section className="bg-gradient-to-b from-slate-50 to-white overflow-hidden">
       <div className="mx-auto max-w-[1350px] px-5 sm:px-6 lg:px-8">
         {/* ── Mobile: stack vertically | Desktop: two columns ── */}
-        <div className="flex flex-col items-center md:grid md:grid-cols-2 md:items-center lg:grid-cols-2 gap-8 md:gap-8 lg:gap-12 py-10 md:py-12 lg:py-16">
+        <div className="flex flex-col items-center md:grid md:grid-cols-2 md:items-center lg:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-6 lg:gap-10 py-10 md:py-12 lg:py-16">
           {/* ── LEFT: Text content ─────────────────────────── */}
           <div className="w-full text-center md:text-left">
             {/* Badge */}
@@ -77,13 +76,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── RIGHT: Hero image / video ─────────────────── */}
+          {/* ── RIGHT: Hero image ──────────────────────────── */}
           <div className="relative w-full flex justify-center md:justify-end">
             {/* Glows — hidden on mobile to avoid overflow */}
             <div className="pointer-events-none absolute -right-10 top-10 -z-10 h-56 w-56 rounded-full bg-blue-200/40 blur-3xl hidden md:block" />
             <div className="pointer-events-none absolute -left-10 bottom-0 -z-10 h-56 w-56 rounded-full bg-indigo-200/30 blur-3xl hidden md:block" />
 
-            {/* <img
+            <img
               src={heroImage}
               alt="Eminence VA Solutions virtual assistant support"
               className="
@@ -97,32 +96,8 @@ export default function Hero() {
                 xl:h-[490px]
                 object-contain
               "
-            /> */}
-
-            {/* Video wrapper to control size + aspect ratio */}
-            <div
-              className="
-                w-full
-                max-w-[560px]
-                lg:max-w-[600px]
-                rounded-2xl
-                shadow-lg
-                overflow-hidden
-              "
-            >
-              <video
-                src={heroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="
-                  w-full
-                  aspect-video
-                  object-cover
-                "
-              />
-            </div>
+            />
+            
           </div>
         </div>
       </div>

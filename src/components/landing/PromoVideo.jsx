@@ -1,4 +1,4 @@
-import promoVideo from "../../assets/prom-video.mov";
+import promoVideo from "../../assets/prom-video.mp4";
 
 export default function PromoVideo() {
   return (

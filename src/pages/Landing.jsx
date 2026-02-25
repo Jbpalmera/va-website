@@ -24,7 +24,7 @@ export default function Landing() {
       <main>
         <Hero />
         {/* <About /> */}
-        {/* <PromoVideo /> */}
+        <PromoVideo />
       </main>
 
       <TrustedBy />
