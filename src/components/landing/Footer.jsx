@@ -42,7 +42,7 @@ export default function Footer() {
     rel="noopener noreferrer"
     className="group"
   >
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
