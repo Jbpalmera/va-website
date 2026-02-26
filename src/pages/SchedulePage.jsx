@@ -18,14 +18,20 @@ function isFutureOnly(date) {
 }
 
 function formatTime(date) {
-  return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 /**
  * Demo: generate slots for a date
  * Replace this with your API call later.
  */
-function buildSlotsForDate(date, tz = Intl.DateTimeFormat().resolvedOptions().timeZone) {
+function buildSlotsForDate(
+  date,
+  tz = Intl.DateTimeFormat().resolvedOptions().timeZone,
+) {
   const base = new Date(date);
   base.setHours(11, 0, 0, 0);
 
@@ -64,7 +70,7 @@ export default function SchedulePage() {
 
   const timezone = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone,
-    []
+    [],
   );
 
   useEffect(() => {
@@ -143,7 +149,10 @@ export default function SchedulePage() {
   useEffect(() => {
     if (!selectedSlotId) return;
     const t = setTimeout(() => {
-      contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      contactRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }, 150);
     return () => clearTimeout(t);
   }, [selectedSlotId]);
@@ -171,8 +180,9 @@ export default function SchedulePage() {
               </h1>
 
               <p className="mt-4 text-slate-600 leading-relaxed">
-                Pick a future date to meet with our team. We’ll learn about your business,
-                recommend the right VA service, and outline next steps.
+                Pick a future date to meet with our team. We’ll learn about your
+                business, recommend the right VA service, and outline next
+                steps.
               </p>
 
               <ul className="mt-6 space-y-3 text-sm text-slate-700">
@@ -202,7 +212,9 @@ export default function SchedulePage() {
                   {selectedSlot ? (
                     <p className="mt-2 text-sm text-slate-700">
                       Selected time:{" "}
-                      <span className="font-semibold">{selectedSlot.label}</span>{" "}
+                      <span className="font-semibold">
+                        {selectedSlot.label}
+                      </span>{" "}
                       ({timezone})
                     </p>
                   ) : (
@@ -253,9 +265,11 @@ export default function SchedulePage() {
                       </div>
 
                       <div className="mt-8 grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-500">
-                        {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((d) => (
-                          <div key={d}>{d}</div>
-                        ))}
+                        {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map(
+                          (d) => (
+                            <div key={d}>{d}</div>
+                          ),
+                        )}
                       </div>
 
                       <div className="mt-3 grid grid-cols-7 gap-2">
@@ -307,7 +321,9 @@ export default function SchedulePage() {
 
                         <div className="flex-1 text-center">
                           <p className="text-lg font-extrabold text-slate-900">
-                            {selectedDate.toLocaleDateString("en-US", { weekday: "long" })}
+                            {selectedDate.toLocaleDateString("en-US", {
+                              weekday: "long",
+                            })}
                           </p>
                           <p className="mt-1 text-sm text-slate-600">
                             {selectedDate.toLocaleDateString("en-US", {
@@ -318,7 +334,9 @@ export default function SchedulePage() {
                           </p>
 
                           <div className="mt-4 text-sm text-slate-600">
-                            <span className="font-semibold text-slate-700">Time zone:</span>{" "}
+                            <span className="font-semibold text-slate-700">
+                              Time zone:
+                            </span>{" "}
                             {timezone}
                           </div>
                         </div>
@@ -330,11 +348,17 @@ export default function SchedulePage() {
                         <p className="text-lg font-extrabold text-slate-900">
                           Select a Time
                         </p>
-                        <p className="mt-1 text-sm text-slate-600">Duration: 20 min</p>
+                        <p className="mt-1 text-sm text-slate-600">
+                          Duration: 20 min
+                        </p>
                       </div>
 
                       {slotsLoading ? (
-                        <LoadingWithLogo className="py-10" logoSize={50} dotSize={8} />
+                        <LoadingWithLogo
+                          className="py-10"
+                          logoSize={50}
+                          dotSize={8}
+                        />
                       ) : (
                         <div className="mt-6 max-h-[420px] space-y-3 overflow-auto pr-2">
                           {timeSlots.map((slot) => {
@@ -405,8 +429,11 @@ export default function SchedulePage() {
                 </p>
               </div>
 
-              {/* Render your Contact form section */}
-              <Contact />
+              <Contact
+                bookingDate={selectedDateLabel}
+                bookingTime={selectedSlot.label}
+                timezone={timezone}
+              />
             </div>
           )}
         </div>

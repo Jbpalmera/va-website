@@ -4,7 +4,7 @@ import Landing from "./pages/Landing";
 import AboutPage from "./pages/AboutPage";
 import SchedulePage from "./pages/SchedulePage";
 import LoadingWithLogo from "./components/ui/LoadingWithLogo";
-
+import ThankYou from "./pages/ThankYou";
 export default function App() {
   const [appLoading, setAppLoading] = useState(true);
 
@@ -35,6 +35,7 @@ export default function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
         </BrowserRouter>
       </div>

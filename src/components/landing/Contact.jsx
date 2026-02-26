@@ -1,18 +1,59 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, ShieldCheck, Clock, MapPin } from "lucide-react";
 
-export default function Contact() {
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+const GHL_WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/qlHEg55vkGblj8OC7iBG/webhook-trigger/14eecf4f-e833-43e9-be64-640a6c864463";
 
-  function handleSubmit(e) {
+export default function Contact({
+  bookingDate = "",
+  bookingTime = "",
+  timezone = "",
+}) {
+  const [status, setStatus] = useState("idle");
+  const navigate = useNavigate();
+console.log("Submitting to:", GHL_WEBHOOK_URL);
+  async function handleSubmit(e) {
     e.preventDefault();
     setStatus("sending");
 
-    // ✅ Placeholder submit
-    // Later: connect to Formspree / Google Forms / backend endpoint.
-    setTimeout(() => {
+    try {
+      const form = e.currentTarget;
+      const fd = new FormData(form);
+
+      const payload = {
+        full_name: String(fd.get("full_name") || "").trim(),
+        email: String(fd.get("email") || "").trim(),
+        company: String(fd.get("company") || "").trim(),
+        service_needed: String(fd.get("service_needed") || "").trim(),
+        preferred_hours: String(fd.get("preferred_hours") || "Not sure").trim(),
+        location: String(fd.get("location") || "").trim(),
+        tasks: String(fd.get("tasks") || "").trim(),
+        booking_date: bookingDate,
+        booking_time: bookingTime,
+        timezone,
+        source: "Eminence Website - Schedule Page",
+      };
+
+      const res = await fetch(GHL_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error(`GHL webhook failed: ${res.status}`);
+
       setStatus("success");
-    }, 900);
+      form.reset();
+
+      // ✅ Redirect correctly (respects /va-website basename)
+      setTimeout(() => navigate("/thank-you"), 500);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 2000);
+      console.error("Submit error:", err);
+    }
   }
 
   return (
@@ -51,31 +92,47 @@ export default function Contact() {
             </h2>
 
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
-              Whether you need Client Support & Revenue Specialists, a Specialized Legal VA,
-              or a Real Estate VA, we’ll help you pick the best fit based on your workflow,
-              volume, and goals.
+              Whether you need Client Support & Revenue Specialists, a
+              Specialized Legal VA, or a Real Estate VA, we’ll help you pick the
+              best fit based on your workflow, volume, and goals.
             </p>
 
             <div className="mt-8 space-y-4 text-sm text-slate-600">
               <div className="flex items-start gap-3">
                 <ShieldCheck className="mt-0.5 h-5 w-5 text-blue-600" />
                 <p>
-                  Confidentiality-first processes. NDA support available upon request.
+                  Confidentiality-first processes. NDA support available upon
+                  request.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-5 w-5 text-blue-600" />
                 <p>
-                  Fast matching. We’ll respond within 24–48 hours to discuss next steps.
+                  Fast matching. We’ll respond within 24–48 hours to discuss
+                  next steps.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 text-blue-600" />
-                <p>
-                  Serving businesses across the US and Canada.
-                </p>
+                <p>Serving businesses across the US and Canada.</p>
               </div>
             </div>
+
+            {/* Booking summary (optional display) */}
+            {bookingDate && bookingTime && (
+              <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                  Booking summary
+                </p>
+                <p className="mt-2 text-sm font-semibold text-slate-900">
+                  {bookingDate} — {bookingTime} ({timezone})
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  This is a preferred time request. Our team will confirm
+                  availability.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Right: form */}
@@ -95,8 +152,10 @@ export default function Contact() {
                   </label>
                   <input
                     required
+                    name="full_name"
                     type="text"
                     placeholder="Your name"
+                    autoComplete="name"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   />
                 </div>
@@ -107,8 +166,10 @@ export default function Contact() {
                   </label>
                   <input
                     required
+                    name="email"
                     type="email"
                     placeholder="you@company.com"
+                    autoComplete="email"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   />
                 </div>
@@ -120,8 +181,10 @@ export default function Contact() {
                     Company / Business (optional)
                   </label>
                   <input
+                    name="company"
                     type="text"
                     placeholder="Company name"
+                    autoComplete="organization"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   />
                 </div>
@@ -132,6 +195,7 @@ export default function Contact() {
                   </label>
                   <select
                     required
+                    name="service_needed"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                     defaultValue=""
                   >
@@ -152,6 +216,7 @@ export default function Contact() {
                     Preferred Hours
                   </label>
                   <select
+                    name="preferred_hours"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                     defaultValue="Not sure"
                   >
@@ -167,6 +232,7 @@ export default function Contact() {
                     Location (optional)
                   </label>
                   <select
+                    name="location"
                     className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                     defaultValue="US"
                   >
@@ -183,6 +249,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   required
+                  name="tasks"
                   rows={4}
                   placeholder="Example: customer support inbox + follow-ups, intake and documentation, CRM updates, appointment setting..."
                   className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
@@ -211,7 +278,8 @@ export default function Contact() {
               </button>
 
               <p className="text-center text-xs text-slate-400">
-                By submitting, you agree to be contacted by Eminence VA Solutions.
+                By submitting, you agree to be contacted by Eminence VA
+                Solutions.
               </p>
             </form>
           </div>
