@@ -12,7 +12,7 @@ export default function Contact({
 }) {
   const [status, setStatus] = useState("idle");
   const navigate = useNavigate();
-console.log("Submitting to:", GHL_WEBHOOK_URL);
+
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("sending");
