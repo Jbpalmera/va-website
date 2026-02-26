@@ -20,7 +20,8 @@ export default function ThankYou() {
 
           <p className="mt-4 text-base leading-relaxed text-slate-600">
             Your consultation request has been submitted successfully. Our team will review your
-            details and contact you within <span className="font-semibold">24–48 hours</span>.
+            details and contact you within{" "}
+            <span className="font-semibold">24–48 hours</span>.
           </p>
 
           <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -58,9 +59,11 @@ export default function ThankYou() {
             </Link>
           </div>
 
-          <p className="mt-8 text-xs text-slate-400">
-            If you don’t hear from us within 48 hours, please check your spam folder or contact us
-            directly.
+          <p className="mt-8 text-sm text-slate-500">
+            We’re excited to connect with you! If you don’t see our email within 48 hours,
+            please take a quick look at your <span className="font-semibold">spam or junk folder</span> —
+            sometimes messages accidentally land there. If it’s still missing, feel free to reach
+            out to us directly and we’ll be happy to assist.
           </p>
         </div>
       </main>
