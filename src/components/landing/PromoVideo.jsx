@@ -13,10 +13,10 @@ export default function PromoVideo() {
       <div className="relative mx-auto max-w-6xl px-6">
         {/* header */}
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold tracking-wide text-white/80">
+          {/* <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold tracking-wide text-white/80">
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
             Product Demo
-          </span>
+          </span> */}
 
           <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             See How It Works
@@ -46,11 +46,11 @@ export default function PromoVideo() {
 
             {/* meta row */}
             <div className="mt-4 flex flex-col gap-3 px-1 md:flex-row md:items-center md:justify-between">
-              <p className="text-sm text-white/60">
+              {/* <p className="text-sm text-white/60">
                 ~2 min overview • Clear process • Real examples
-              </p>
+              </p> */}
 
-              <div className="flex flex-wrap gap-2">
+              {/* <div className="flex flex-wrap gap-2">
                 <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
                   HD Playback
                 </span>
@@ -60,7 +60,7 @@ export default function PromoVideo() {
                 <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
                   No signup
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
 

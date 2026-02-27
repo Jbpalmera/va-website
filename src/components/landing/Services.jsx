@@ -2,7 +2,7 @@ import { Headphones, Scale, Home, ArrowRight, MessagesSquare, FileText, Users } 
 
 const categories = [
   {
-    label: "01",
+    // label: "01",
     title: "Client Support\n& Revenue Specialists",
     tagline: "Strengthen relationships, improve response time, grow revenue",
     gradient: "from-slate-800 to-slate-700",
@@ -17,7 +17,7 @@ const categories = [
     ],
   },
   {
-    label: "02",
+    // label: "02",
     title: "Specialized\nLegal Virtual Assistants",
     tagline: "Structured legal admin support for fast-moving casework",
     gradient: "from-slate-800 to-slate-700",
@@ -32,7 +32,7 @@ const categories = [
     ],
   },
   {
-    label: "03",
+    // label: "03",
     title: "Real Estate\nVirtual Assistants",
     tagline: "Stay organized, respond faster, and close deals easier",
     gradient: "from-slate-800 to-slate-700",
@@ -74,10 +74,10 @@ export default function Services() {
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
+          {/* <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
             Our Services
-          </span>
+          </span> */}
 
           <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
             Specialized VA Support Built For{" "}

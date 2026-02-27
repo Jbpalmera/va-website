@@ -1,63 +1,63 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowRight, ShieldCheck, Clock, MapPin } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ShieldCheck, Clock, MapPin } from "lucide-react";
 
-const GHL_WEBHOOK_URL =
-  "https://services.leadconnectorhq.com/hooks/qlHEg55vkGblj8OC7iBG/webhook-trigger/14eecf4f-e833-43e9-be64-640a6c864463";
+const GHL_FORM_ID = "T45vz0d2Gf47HpTOk6Jf";
+const GHL_EMBED_SCRIPT = "https://link.msgsndr.com/js/form_embed.js";
+const IFRAME_ID = `inline-${GHL_FORM_ID}`;
+const IFRAME_SRC = `https://api.leadconnectorhq.com/widget/form/${GHL_FORM_ID}`;
+
+function loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) return resolve();
+    const s = document.createElement("script");
+    s.src = src;
+    s.async = true;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.body.appendChild(s);
+  });
+}
 
 export default function Contact({
   bookingDate = "",
   bookingTime = "",
   timezone = "",
 }) {
-  const [status, setStatus] = useState("idle");
-  const navigate = useNavigate();
+  const iframeRef = useRef(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("sending");
+  useEffect(() => {
+    let cancelled = false;
 
-    try {
-      const form = e.currentTarget;
-      const fd = new FormData(form);
+    (async () => {
+      try {
+        await loadScriptOnce(GHL_EMBED_SCRIPT);
+        if (cancelled) return;
 
-      const payload = {
-        full_name: String(fd.get("full_name") || "").trim(),
-        email: String(fd.get("email") || "").trim(),
-        company: String(fd.get("company") || "").trim(),
-        service_needed: String(fd.get("service_needed") || "").trim(),
-        preferred_hours: String(fd.get("preferred_hours") || "Not sure").trim(),
-        location: String(fd.get("location") || "").trim(),
-        tasks: String(fd.get("tasks") || "").trim(),
-        booking_date: bookingDate,
-        booking_time: bookingTime,
-        timezone,
-        source: "Eminence Website - Schedule Page",
-      };
+        // Force reflow so GHL recalculates container width
+        setTimeout(() => {
+          const iframe = iframeRef.current;
+          if (!iframe) return;
 
-      const res = await fetch(GHL_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+          iframe.style.visibility = "hidden";
+          // eslint-disable-next-line no-unused-expressions
+          iframe.offsetHeight;
+          iframe.style.visibility = "visible";
+        }, 300);
+      } catch (err) {
+        console.error("Failed to load GHL embed script:", err);
+      }
+    })();
 
-      if (!res.ok) throw new Error(`GHL webhook failed: ${res.status}`);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-      setStatus("success");
-      form.reset();
-
-      // ✅ Redirect correctly (respects /va-website basename)
-      setTimeout(() => navigate("/thank-you"), 500);
-    } catch (err) {
-      console.error(err);
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 2000);
-      console.error("Submit error:", err);
-    }
-  }
+  const showBooking = Boolean(bookingDate && bookingTime);
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-white py-20">
+    <section id="contact" className="relative bg-white py-20">
       {/* Faint grid */}
       <div
         aria-hidden
@@ -78,211 +78,124 @@ export default function Contact({
         }}
       />
 
-      <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-          {/* Left: copy */}
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-              Get Matched With a VA
-            </span>
+      <div className="relative mx-auto max-w-[980px] px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+            Get Matched With a VA
+          </span>
 
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-              Tell us what you need — we’ll recommend the right assistant
-            </h2>
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Request a Free Consultation
+          </h2>
 
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
-              Whether you need Client Support & Revenue Specialists, a
-              Specialized Legal VA, or a Real Estate VA, we’ll help you pick the
-              best fit based on your workflow, volume, and goals.
-            </p>
+          <p className="mt-3 text-base leading-relaxed text-slate-600">
+            Fill out the form and we’ll get back to you shortly with the best VA
+            match based on your workflow, volume, and goals.
+          </p>
+        </div>
 
-            <div className="mt-8 space-y-4 text-sm text-slate-600">
+        {/* Form Card */}
+        <div className="mx-auto mt-10 min-w-0 w-full rounded-3xl border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
+          {showBooking && (
+            <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                Preferred time
+              </p>
+              <p className="mt-2 text-sm font-semibold text-slate-900">
+                {bookingDate} — {bookingTime} ({timezone})
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                This is a preferred time request. Our team will confirm
+                availability.
+              </p>
+            </div>
+          )}
+
+          <div className="min-w-0 w-full">
+            <iframe
+              ref={iframeRef}
+              src={IFRAME_SRC}
+              id={IFRAME_ID}
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Consult Form"
+              data-layout-iframe-id={IFRAME_ID}
+              data-form-id={GHL_FORM_ID}
+              title="Consult Form"
+              style={{
+                display: "block",
+                width: "100%",
+                maxWidth: "100%",
+                height: "560px",
+                border: "none",
+                overflow: "visible",
+              }}
+            />
+          </div>
+
+          <p className="mt-4 text-center text-xs text-slate-400">
+            By submitting, you agree to be contacted by Eminence VA Solutions.
+          </p>
+        </div>
+
+        {/* Details BELOW (single column) */}
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
               <div className="flex items-start gap-3">
                 <ShieldCheck className="mt-0.5 h-5 w-5 text-blue-600" />
-                <p>
-                  Confidentiality-first processes. NDA support available upon
-                  request.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="mt-0.5 h-5 w-5 text-blue-600" />
-                <p>
-                  Fast matching. We’ll respond within 24–48 hours to discuss
-                  next steps.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 text-blue-600" />
-                <p>Serving businesses across the US and Canada.</p>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Confidentiality-first
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    NDA support available upon request.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Booking summary (optional display) */}
-            {bookingDate && bookingTime && (
-              <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                  Booking summary
-                </p>
-                <p className="mt-2 text-sm font-semibold text-slate-900">
-                  {bookingDate} — {bookingTime} ({timezone})
-                </p>
-                <p className="mt-1 text-xs text-slate-500">
-                  This is a preferred time request. Our team will confirm
-                  availability.
-                </p>
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <div className="flex items-start gap-3">
+                <Clock className="mt-0.5 h-5 w-5 text-blue-600" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Fast matching
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    We respond within 24–48 hours.
+                  </p>
+                </div>
               </div>
-            )}
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 text-blue-600" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    US & Canada
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Serving businesses across North America.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right: form */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
-            <p className="text-sm font-semibold text-slate-900">
-              Request a Free Consultation
-            </p>
-            <p className="mt-1 text-sm text-slate-500">
-              Fill out the form and we’ll get back to you shortly.
-            </p>
-
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Full Name
-                  </label>
-                  <input
-                    required
-                    name="full_name"
-                    type="text"
-                    placeholder="Your name"
-                    autoComplete="name"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Work Email
-                  </label>
-                  <input
-                    required
-                    name="email"
-                    type="email"
-                    placeholder="you@company.com"
-                    autoComplete="email"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  />
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Company / Business (optional)
-                  </label>
-                  <input
-                    name="company"
-                    type="text"
-                    placeholder="Company name"
-                    autoComplete="organization"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Service Needed
-                  </label>
-                  <select
-                    required
-                    name="service_needed"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>
-                      Select one
-                    </option>
-                    <option>Client Support & Revenue Specialist</option>
-                    <option>Specialized Legal Virtual Assistant</option>
-                    <option>Real Estate Virtual Assistant</option>
-                    <option>Not sure — help me choose</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Preferred Hours
-                  </label>
-                  <select
-                    name="preferred_hours"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                    defaultValue="Not sure"
-                  >
-                    <option>Not sure</option>
-                    <option>Part-time</option>
-                    <option>Full-time</option>
-                    <option>Multiple assistants</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-slate-700">
-                    Location (optional)
-                  </label>
-                  <select
-                    name="location"
-                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                    defaultValue="US"
-                  >
-                    <option>US</option>
-                    <option>Canada</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-semibold text-slate-700">
-                  What tasks do you want to delegate?
-                </label>
-                <textarea
-                  required
-                  name="tasks"
-                  rows={4}
-                  placeholder="Example: customer support inbox + follow-ups, intake and documentation, CRM updates, appointment setting..."
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                />
-              </div>
-
-              {/* Status */}
-              {status === "success" && (
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                  ✅ Submitted! We’ll reach out shortly.
-                </div>
-              )}
-              {status === "error" && (
-                <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-                  Something went wrong. Please try again.
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition hover:bg-slate-700 disabled:opacity-60"
-              >
-                {status === "sending" ? "Sending..." : "Request Consultation"}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-
-              <p className="text-center text-xs text-slate-400">
-                By submitting, you agree to be contacted by Eminence VA
-                Solutions.
-              </p>
-            </form>
-          </div>
+          {/* Extra note */}
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Not sure what to select? Choose the closest option and list your
+            tasks—our team will recommend the best VA profile for your needs.
+          </p>
         </div>
       </div>
     </section>

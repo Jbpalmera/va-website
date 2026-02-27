@@ -54,7 +54,7 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* Instagram (replace with real URL if you have it) */}
+              {/* Instagram */}
               <a
                 href="https://www.instagram.com/"
                 target="_blank"
@@ -72,7 +72,7 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* TikTok (replace with real URL if you have it) */}
+              {/* TikTok */}
               <a
                 href="https://www.tiktok.com/"
                 target="_blank"
@@ -90,7 +90,7 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* LinkedIn (replace with real URL if you have it) */}
+              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
@@ -119,12 +119,9 @@ export default function Footer() {
               <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-slate-300 transition hover:text-white"
-                    >
+                    <span className="cursor-default text-sm text-slate-300">
                       {item}
-                    </a>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -140,15 +137,9 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-6 text-xs">
-            <a href="#" className="transition hover:text-white">
-              Privacy Policy
-            </a>
-            <a href="#" className="transition hover:text-white">
-              Terms of Service
-            </a>
-            <a href="#" className="transition hover:text-white">
-              Cookie Policy
-            </a>
+            <span className="cursor-default">Privacy Policy</span>
+            <span className="cursor-default">Terms of Service</span>
+            <span className="cursor-default">Cookie Policy</span>
           </div>
         </div>
       </div>

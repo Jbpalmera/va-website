@@ -154,7 +154,7 @@ const plans = [
         bestFor: "Teams comparing providers and wanting full transparency.",
         details: [
           "Competitors often charge extra for management and replacements",
-          "Many don’t include structured reporting or performance support",
+          "Many don't include structured reporting or performance support",
           "We provide managed assistants + systems + accountability",
         ],
       },
@@ -217,8 +217,6 @@ function Modal({ open, onClose, planName, label, price, bestFor, bullets = [] })
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-white/70">Selected Rate</p>
-
-                {/* PRICE */}
                 <p className="mt-1 text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
                   {price}
                 </p>
@@ -341,7 +339,6 @@ export default function Pricing() {
 
   const [expanded, setExpanded] = useState({});
 
-  // ✅ FIXED openModal (passes price)
   const openModal = ({ planName, label, value, details, bestFor }) => {
     setModalData({
       planName,
@@ -474,8 +471,9 @@ export default function Pricing() {
                   {/* selector */}
                   {plan.options?.length > 0 && (
                     <div className="mt-4">
-                      <p className={`mb-2 text-[11px] font-semibold uppercase tracking-widest ${plan.highlighted ? "text-white/60" : "text-slate-400"}`}>
-                        Select {plan.name === "Starter" ? "a rate" : "a tier"}
+                      {/* ✅ Updated instruction text */}
+                      <p className={`mb-2 text-[11px] font-medium ${plan.highlighted ? "text-white/50" : "text-slate-400"}`}>
+                         Click a button below to view pricing details
                       </p>
 
                       <div className="grid grid-cols-3 gap-2">

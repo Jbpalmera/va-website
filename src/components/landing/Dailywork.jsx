@@ -12,7 +12,7 @@ const messages = [
   {
     icon: Headphones,
     tag: "Client Support",
-    time: "9:10 AM",
+
     accentColor: "text-blue-600",
     accentBg: "bg-blue-500",
     badgeBg: "bg-blue-100 text-blue-700",
@@ -24,7 +24,7 @@ const messages = [
   {
     icon: BadgeDollarSign,
     tag: "Revenue",
-    time: "11:40 AM",
+   
     accentColor: "text-violet-600",
     accentBg: "bg-violet-500",
     badgeBg: "bg-violet-100 text-violet-700",
@@ -36,7 +36,7 @@ const messages = [
   {
     icon: ClipboardList,
     tag: "Legal Intake",
-    time: "1:05 PM",
+   
     accentColor: "text-indigo-600",
     accentBg: "bg-indigo-500",
     badgeBg: "bg-indigo-100 text-indigo-700",
@@ -48,7 +48,7 @@ const messages = [
   {
     icon: FileText,
     tag: "Legal Admin",
-    time: "2:30 PM",
+
     accentColor: "text-rose-600",
     accentBg: "bg-rose-500",
     badgeBg: "bg-rose-100 text-rose-700",
@@ -60,7 +60,7 @@ const messages = [
   {
     icon: Home,
     tag: "Real Estate",
-    time: "3:20 PM",
+
     accentColor: "text-emerald-600",
     accentBg: "bg-emerald-500",
     badgeBg: "bg-emerald-100 text-emerald-700",
@@ -72,7 +72,7 @@ const messages = [
   {
     icon: LayoutDashboard,
     tag: "CRM Updates",
-    time: "5:10 PM",
+ 
     accentColor: "text-amber-600",
     accentBg: "bg-amber-500",
     badgeBg: "bg-amber-100 text-amber-700",
@@ -103,10 +103,7 @@ export default function DailyWork() {
 
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-slate-600 shadow-sm">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-            Real Work, Done Daily
-          </span>
+          
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             What Your Assistant{" "}
             <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">

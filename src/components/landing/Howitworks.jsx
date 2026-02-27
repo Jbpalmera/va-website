@@ -15,7 +15,6 @@ const steps = [
     accentBorder: "border-blue-500/20",
     glow: "shadow-blue-500/20",
     bar: "from-blue-500 to-blue-400",
-    numberColor: "text-blue-500/20",
   },
   {
     number: "02",
@@ -29,7 +28,6 @@ const steps = [
     accentBorder: "border-violet-500/20",
     glow: "shadow-violet-500/20",
     bar: "from-violet-500 to-violet-400",
-    numberColor: "text-violet-500/20",
   },
   {
     number: "03",
@@ -43,7 +41,6 @@ const steps = [
     accentBorder: "border-emerald-500/20",
     glow: "shadow-emerald-500/20",
     bar: "from-emerald-500 to-emerald-400",
-    numberColor: "text-emerald-500/20",
   },
   {
     number: "04",
@@ -57,7 +54,6 @@ const steps = [
     accentBorder: "border-amber-500/20",
     glow: "shadow-amber-500/20",
     bar: "from-amber-500 to-amber-400",
-    numberColor: "text-amber-500/20",
   },
 ];
 
@@ -80,10 +76,6 @@ export default function HowItWorks() {
 
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-slate-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-            The Process
-          </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
             How It{" "}
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -115,11 +107,6 @@ export default function HowItWorks() {
                 >
                   {/* Top gradient bar */}
                   <span className={`absolute top-0 left-0 h-0.5 w-full bg-gradient-to-r ${step.bar}`} />
-
-                  {/* Number watermark */}
-                  <span className={`absolute right-4 bottom-4 text-7xl font-black leading-none select-none ${step.numberColor}`}>
-                    {step.number}
-                  </span>
 
                   {/* Icon */}
                   <div className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border ${step.accentBg} ${step.accentBorder}`}>

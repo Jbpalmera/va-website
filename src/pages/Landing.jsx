@@ -38,7 +38,7 @@ export default function Landing() {
       <CTA />
       {/* <Contact />   */}
       <Footer />
-      <FloatingChat />
+      {/* <FloatingChat /> */}
       <BackToTop />
     </div>
   );

@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Home", href: "/" },   
   { label: "Services", href: "#services" },
   { label: "About", href: "/about" },
-  { label: "Use Cases", href: "#usecases" },
+  // { label: "Use Cases", href: "#usecases" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -158,12 +158,12 @@ export default function Navbar() {
 
         {/* Desktop Actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <a
+          {/* <a
             href="#signin"
             className="text-sm text-slate-600 transition hover:text-slate-900"
           >
             Sign In
-          </a>
+          </a> */}
           <a
             href="#contact"
             className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
