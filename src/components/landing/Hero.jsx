@@ -1,5 +1,5 @@
-import heroImage from "../../assets/va-hero7.png";
-import heroVideo from "../../assets/prom-video.mp4";
+import heroImage from "../../assets/va-hero2.png";
+
 function CheckItem({ children }) {
   return (
     <li className="flex gap-3">
@@ -13,11 +13,10 @@ function CheckItem({ children }) {
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+    <section className="bg-[#efeefe] overflow-hidden">
       <div className="mx-auto max-w-[1350px] px-5 sm:px-6 lg:px-8">
-        {/* ── Mobile: stack vertically | Desktop: two columns ── */}
         <div className="flex flex-col items-center md:grid md:grid-cols-2 md:items-center lg:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-6 lg:gap-10 py-10 md:py-12 lg:py-16">
-          {/* ── LEFT: Text content ─────────────────────────── */}
+          {/* LEFT SIDE */}
           <div className="w-full text-center md:text-left">
             {/* Badge */}
             <p className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
@@ -26,34 +25,40 @@ export default function Hero() {
             </p>
 
             {/* Headline */}
-            <h1 className="mt-4 text-[1.75rem] leading-tight font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-              Scale Your Business with Reliable{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1
+              className="
+                mt-5 font-bold tracking-tight text-slate-900
+                leading-[1.08]
+                text-[1.75rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.75rem] xl:text-[3.05rem]
+                max-w-[740px] mx-auto md:mx-0
+              "
+            >
+              Scale Your Business with Reliable
+              <br className="hidden lg:block" />
+              <span className="bg-gradient-to-r from-[#2563EB] via-[#60A5FA] to-[#C084FC] bg-clip-text text-transparent">
                 Virtual Assistant Support
               </span>{" "}
               You Can Trust
             </h1>
 
-            {/* Subtext
-            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base md:text-base max-w-xl mx-auto md:mx-0">
-              Save time, reduce operational costs, and focus on growing your business
-              while our skilled virtual assistants handle your daily tasks with
-              precision and reliability — built for founders, startups, and growing
-              teams in the US and Canada.
-            </p> */}
-
-            {/* Check list */}
+            {/* Checklist */}
             <ul className="mt-6 space-y-2.5 text-left inline-flex flex-col">
-              <CheckItem>Reliable VAs trained for day-to-day business operations</CheckItem>
-              <CheckItem>Cost-effective support without full-time overhead</CheckItem>
-              <CheckItem>Flexible outsourcing that scales with your business</CheckItem>
+              <CheckItem>
+                Reliable VAs trained for day-to-day business operations
+              </CheckItem>
+              <CheckItem>
+                Cost-effective support without full-time overhead
+              </CheckItem>
+              <CheckItem>
+                Flexible outsourcing that scales with your business
+              </CheckItem>
             </ul>
 
-            {/* CTAs */}
+            {/* Left CTAs */}
             <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
               <a
                 href="#contact"
-                className="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+                className="rounded-full bg-[#289efd] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#062d60]"
               >
                 Book a Free Consultation
               </a>
@@ -76,28 +81,55 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── RIGHT: Hero image ──────────────────────────── */}
+          {/* RIGHT SIDE */}
           <div className="relative w-full flex justify-center md:justify-end">
-            {/* Glows — hidden on mobile to avoid overflow */}
+            {/* Glow Effects */}
             <div className="pointer-events-none absolute -right-10 top-10 -z-10 h-56 w-56 rounded-full bg-blue-200/40 blur-3xl hidden md:block" />
             <div className="pointer-events-none absolute -left-10 bottom-0 -z-10 h-56 w-56 rounded-full bg-indigo-200/30 blur-3xl hidden md:block" />
 
-            <img
-              src={heroImage}
-              alt="Eminence VA Solutions virtual assistant support"
-              className="
-                w-full
-                max-w-[260px]
-                sm:max-w-[320px]
-                md:max-w-none
-                md:w-auto
-                md:h-[400px]
-                lg:h-[450px]
-                xl:h-[490px]
-                object-contain
-              "
-            />
-            
+            {/* Image Wrapper */}
+            <div className="relative inline-block">
+              <img
+                src={heroImage}
+                alt="Eminence VA Solutions virtual assistant support"
+                className="
+                  w-full
+                  max-w-[260px]
+                  sm:max-w-[320px]
+                  md:max-w-none
+                  md:w-auto
+                  md:h-[400px]
+                  lg:h-[450px]
+                  xl:h-[490px]
+                  object-contain
+                "
+              />
+
+              {/* OVERLAP BUTTON ON WAIST/BELT AREA */}
+              <a
+                href="#services"
+                className="
+    absolute
+    left-1/2
+    -translate-x-1/2
+    top-[84%]
+    z-10
+    rounded-full
+    bg-[#062d60]
+    px-4 sm:px-6 md:px-10 lg:px-14
+    py-2 sm:py-2.5 md:py-3
+    text-[10px] sm:text-xs md:text-sm
+    font-semibold
+    text-white
+    shadow-lg
+    transition
+    hover:bg-[#289efd]
+    whitespace-nowrap
+  "
+              >
+                Explore Services
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -16,11 +16,11 @@ const services = [
     icon: Headphones,
     title: "Customer Support Coverage",
     description: "Handle tickets, inboxes, and chats with fast, professional responses.",
-    accentColor: "text-blue-600",
+    accentColor: "text-[#289efd]",
     accentBg: "bg-blue-50",
     accentBorder: "border-blue-100",
-    badgeBg: "bg-blue-100 text-blue-700",
-    bar: "bg-blue-500",
+    badgeBg: "bg-blue-100 text-[#289efd]",
+    bar: "bg-[#289efd]",
   },
   {
     icon: BadgeDollarSign,
@@ -97,7 +97,7 @@ const services = [
 export default function MoreServices() {
   return (
     <section id="more-va" className="relative overflow-hidden bg-white py-20">
-      {/* Faint grid */}
+      {/* Enhanced background with blue tint */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -112,20 +112,20 @@ export default function MoreServices() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 40% at 50% 0%, white 0%, transparent 100%)",
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40, 158, 253, 0.03) 0%, transparent 100%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#289efd]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#289efd]" />
             What Your VA Can Handle
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Support That Fits Your{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#289efd] to-[#1e7dd8] bg-clip-text text-transparent">
               Workflow
             </span>
           </h2>
@@ -136,46 +136,74 @@ export default function MoreServices() {
         </div>
 
         {/* Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => {
             const Icon = s.icon;
             return (
               <div
                 key={s.title}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${s.accentBorder}`}
+                className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${s.accentBorder}`}
               >
-                {/* Top accent bar */}
-                <span className={`absolute top-0 left-0 h-0.5 w-full ${s.bar}`} />
+                {/* Top accent bar with glow on hover */}
+                <span 
+                  className={`absolute top-0 left-0 h-1 w-full transition-all duration-300 ${s.bar} group-hover:h-1.5`}
+                  style={{
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
 
-                {/* Icon */}
-                <div
-                  className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 transition-all duration-300 ${s.accentBg} ${s.accentBorder} ${s.accentColor}`}
-                >
-                  <Icon className="h-5 w-5" strokeWidth={2} />
+                {/* Background glow effect on hover */}
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `radial-gradient(circle at top left, ${s.accentBg.replace('bg-', 'rgba(')}15 0%, transparent 60%)`,
+                    }}
+                  />
                 </div>
 
-                {/* Title */}
-                <h3 className="mb-2 text-sm font-bold text-slate-900 leading-snug">
-                  {s.title}
-                </h3>
+                {/* Content wrapper */}
+                <div className="relative z-10">
+                  {/* Icon with enhanced styling */}
+                  <div
+                    className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ring-2 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-md ${s.accentBg} ${s.accentBorder} ${s.accentColor}`}
+                  >
+                    <Icon className="h-6 w-6" strokeWidth={2} />
+                  </div>
 
-                {/* Description */}
-                <p className="mb-5 flex-1 text-xs leading-relaxed text-slate-500">
-                  {s.description}
-                </p>
+                  {/* Title */}
+                  <h3 className="mb-3 text-base font-bold text-slate-900 leading-snug transition-colors duration-300 group-hover:text-slate-900">
+                    {s.title}
+                  </h3>
 
-                {/* CTA */}
-                <a
-                  href="#contact"
-                  className={`inline-flex items-center gap-1.5 self-start rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${s.badgeBg} hover:gap-2.5`}
-                >
-                  Book a Free Call
-                  <ArrowRight className="h-3 w-3" />
-                </a>
+                  {/* Description */}
+                  <p className="mb-6 flex-1 text-sm leading-relaxed text-slate-600">
+                    {s.description}
+                  </p>
 
-                {/* Hover bottom sweep line */}
+                  {/* CTA */}
+                  <a
+                    href="#contact"
+                    className={`inline-flex items-center gap-2 self-start rounded-full px-4 py-2 text-xs font-semibold shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md ${s.badgeBg} group-hover:gap-3`}
+                  >
+                    Book a Free Call
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+
+                {/* Enhanced hover bottom sweep line */}
                 <span
-                  className={`absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full ${s.bar}`}
+                  className={`absolute bottom-0 left-0 h-1 w-0 transition-all duration-500 group-hover:w-full ${s.bar}`}
+                  style={{
+                    boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+
+                {/* Corner accent (optional decorative element) */}
+                <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20" 
+                  style={{
+                    backgroundColor: s.bar.replace('bg-', ''),
+                  }}
                 />
               </div>
             );
@@ -183,13 +211,13 @@ export default function MoreServices() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-slate-700"
+            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#289efd] to-[#1e7dd8] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#289efd]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#289efd]/40"
           >
             Talk to an Expert
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
       </div>

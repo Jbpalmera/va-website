@@ -1,6 +1,6 @@
 import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
-import FloatingChat from "../components/FloatingChat";
+// import FloatingChat from "../components/FloatingChat";
 import BackToTop from "../components/BackToTop";
 
 import logo from "../assets/logo1.png";
@@ -225,7 +225,7 @@ export default function AboutPage() {
       </main>
 
       <Footer />
-      <FloatingChat />
+      {/* <FloatingChat /> */}
       <BackToTop />
     </div>
   );

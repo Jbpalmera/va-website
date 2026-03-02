@@ -88,8 +88,8 @@ const plans = [
     cta: "Get Matched With a VA",
     highlighted: true,
     badge: "Most Popular",
-    accentBar: "bg-blue-400",
-    hoursBadge: "bg-blue-500/20 text-blue-200",
+    accentBar: "bg-white/30",
+    hoursBadge: "bg-white/20 text-white",
     options: [
       {
         key: "pro-basic",
@@ -144,7 +144,7 @@ const plans = [
     ],
     cta: "Talk to an Expert",
     highlighted: false,
-    accentBar: "bg-indigo-400",
+    accentBar: "bg-slate-300",
     hoursBadge: "bg-indigo-50 text-indigo-600",
     options: [
       {
@@ -183,97 +183,130 @@ function Modal({ open, onClose, planName, label, price, bestFor, bullets = [] })
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
+      {/* Enhanced backdrop with blur */}
+      <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-md" />
 
-      {/* Modal */}
-      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/10 bg-[#0b172a] shadow-2xl">
-        {/* Top glow */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-blue-500/25 to-transparent" />
+      {/* Modal with gradient matching PromoVideo */}
+      <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-[#289efd] to-[#0a3f82] shadow-2xl">
+        {/* Gradient highlight effects - matching PromoVideo */}
+        <div className="pointer-events-none absolute inset-0">
+          {/* Soft top highlight */}
+          <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
+          {/* Subtle side glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
+        </div>
 
-        {/* Header */}
-        <div className="relative flex items-start justify-between gap-4 px-6 pt-6">
+        {/* Subtle pattern */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        {/* Header - Reduced padding */}
+        <div className="relative flex items-start justify-between gap-4 border-b border-white/10 px-6 py-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
-              {planName} • {label}
-            </p>
-            <h3 className="mt-2 text-xl font-bold tracking-tight text-white">
+            <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 backdrop-blur-sm">
+              <span className="h-1 w-1 rounded-full bg-white" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white">
+                {planName} • {label}
+              </span>
+            </div>
+            <h3 className="mt-1.5 text-xl font-bold tracking-tight text-white">
               Pricing Details
             </h3>
           </div>
 
           <button
             onClick={onClose}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-105"
             aria-label="Close"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" strokeWidth={2} />
           </button>
         </div>
 
-        {/* Price emphasis */}
-        <div className="relative mt-5 px-6">
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold text-white/70">Selected Rate</p>
-                <p className="mt-1 text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
-                  {price}
-                </p>
+        {/* Content - Reduced padding */}
+        <div className="relative px-6 py-5">
+          {/* Price emphasis - More compact */}
+          <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-end justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold text-white/80">Selected Rate</p>
+                  <p className="mt-1.5 text-4xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                    {price}
+                  </p>
+                </div>
+
+                <span className="inline-flex items-center gap-1 rounded-full border border-amber-300/30 bg-amber-400/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-900 shadow-lg">
+                  <Sparkles className="h-3 w-3" />
+                  Most Chosen
+                </span>
               </div>
 
-              <span className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-200">
-                Most chosen
-              </span>
+              {bestFor && (
+                <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
+                    Best for
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-white">{bestFor}</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Included features - More compact */}
+          <div className="mt-5">
+            <div className="mb-3 flex items-center gap-2">
+              <div className="h-px flex-1 bg-white/10" />
+              <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
+                What's Included
+              </p>
+              <div className="h-px flex-1 bg-white/10" />
             </div>
 
-            {bestFor && (
-              <div className="rounded-xl bg-black/20 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
-                  Best for
-                </p>
-                <p className="mt-1 text-sm text-white/80">{bestFor}</p>
-              </div>
-            )}
+            <ul className="space-y-2">
+              {bullets.map((b) => (
+                <li key={b} className="flex gap-2.5">
+                  <div className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center rounded-full bg-emerald-400/20">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" strokeWidth={2.5} />
+                  </div>
+                  <span className="text-xs leading-relaxed text-white/90">{b}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        {/* Included */}
-        <div className="relative px-6 py-6">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/60">
-            Included
-          </p>
-
-          <ul className="space-y-3">
-            {bullets.map((b) => (
-              <li key={b} className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-400" />
-                <span className="text-sm leading-relaxed text-white/80">{b}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          {/* Action buttons - More compact */}
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
             <a
               href="#contact"
               onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:opacity-90"
+              className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#289efd] shadow-xl transition-all hover:scale-[1.02] hover:bg-white/95"
             >
               Continue to Consultation
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </a>
 
             <button
               onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center rounded-xl bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
+              className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
               Close
             </button>
           </div>
 
-          <p className="mt-4 text-xs text-white/50">
-            Final pricing may vary depending on role complexity and hours required.
-          </p>
+          {/* Disclaimer - More compact */}
+          <div className="mt-4 rounded-lg border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
+            <p className="text-[10px] leading-relaxed text-white/70">
+              <span className="font-semibold text-white/90">Note:</span> Final pricing may
+              vary depending on role complexity, hours required, and specialization needs.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -288,16 +321,20 @@ function FeatureList({ features, highlighted, planKey, expanded, setExpanded }) 
 
   return (
     <div>
-      <ul className="space-y-2">
+      <ul className="space-y-2.5">
         {visible.map((f) => (
-          <li key={f} className="flex items-start gap-2.5">
+          <li key={f} className="flex items-start gap-3">
             <CheckCircle2
               className={`mt-0.5 h-4 w-4 flex-none ${
-                highlighted ? "text-emerald-400" : "text-emerald-500"
+                highlighted ? "text-white" : "text-emerald-500"
               }`}
               strokeWidth={2.5}
             />
-            <span className={`text-[13px] ${highlighted ? "text-slate-200" : "text-slate-600"}`}>
+            <span
+              className={`text-[13px] leading-relaxed ${
+                highlighted ? "text-white/90" : "text-slate-600"
+              }`}
+            >
               {f}
             </span>
           </li>
@@ -308,8 +345,8 @@ function FeatureList({ features, highlighted, planKey, expanded, setExpanded }) 
         <button
           type="button"
           onClick={() => setExpanded((prev) => ({ ...prev, [planKey]: !prev[planKey] }))}
-          className={`mt-4 inline-flex items-center gap-2 text-xs font-semibold transition ${
-            highlighted ? "text-blue-200 hover:text-white" : "text-slate-500 hover:text-slate-900"
+          className={`mt-4 inline-flex items-center gap-2 text-xs font-semibold transition-all hover:gap-3 ${
+            highlighted ? "text-white/90 hover:text-white" : "text-slate-500 hover:text-slate-900"
           }`}
         >
           {isExpanded ? (
@@ -352,7 +389,7 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="relative overflow-hidden bg-slate-50 py-16">
-      {/* grid */}
+      {/* Enhanced grid background */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -367,26 +404,26 @@ export default function Pricing() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, #f8fafc 0%, transparent 100%)",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(40, 158, 253, 0.03) 0%, transparent 100%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#289efd]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#289efd]" />
             Flexible Plans
           </span>
 
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Plans &{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#289efd] to-[#1e7dd8] bg-clip-text text-transparent">
               Pricing
             </span>
           </h2>
 
-          <p className="mt-3 text-sm leading-relaxed text-slate-500">
+          <p className="mt-4 text-sm leading-relaxed text-slate-500">
             Select a rate or tier to view detailed inclusions and pricing context.
           </p>
         </div>
@@ -399,81 +436,112 @@ export default function Pricing() {
             return (
               <div
                 key={plan.name}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 ${
+                className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border transition-all duration-300 ${
                   plan.highlighted
-                    ? "border-blue-500 bg-slate-900 text-white shadow-2xl shadow-blue-900/25 lg:-mt-3"
-                    : "border-slate-200 bg-white shadow-sm hover:-translate-y-1 hover:shadow-xl"
+                    ? "border-[#289efd]/30 bg-gradient-to-b from-[#289efd] to-[#0a3f82] text-white shadow-2xl shadow-[#289efd]/25 lg:-mt-4 lg:scale-105"
+                    : "border-slate-200 bg-white shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-slate-300"
                 }`}
               >
-                {/* accent */}
-                <span className={`absolute top-0 left-0 h-1 w-full ${plan.accentBar}`} />
+                {/* Accent bar */}
+                <span className={`absolute top-0 left-0 h-1.5 w-full ${plan.accentBar}`} />
 
-                {/* badge */}
+                {/* Highlighted card with gradient effects - matching PromoVideo */}
+                {plan.highlighted && (
+                  <>
+                    {/* Gradient highlight effects */}
+                    <div className="pointer-events-none absolute inset-0">
+                      {/* Soft top highlight */}
+                      <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
+                      {/* Subtle side glow */}
+                      <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
+                    </div>
+                    
+                    {/* Dot pattern */}
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-5"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                        backgroundSize: "32px 32px",
+                      }}
+                    />
+                  </>
+                )}
+
+                {/* Badge */}
                 {plan.badge && (
-                  <div className="flex justify-center pt-4">
-                    <span className="rounded-full bg-amber-400 px-4 py-0.5 text-xs font-bold text-slate-900 shadow">
+                  <div className="flex justify-center pt-5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-4 py-1 text-xs font-bold uppercase tracking-wide text-slate-900 shadow-lg">
+                      <Sparkles className="h-3.5 w-3.5" />
                       {plan.badge}
                     </span>
                   </div>
                 )}
 
-                <div className={`flex flex-1 flex-col p-6 ${plan.badge ? "pt-3" : "pt-6"}`}>
-                  {/* icon + name */}
-                  <div className="mb-4 flex items-center gap-3">
+                <div className={`relative flex flex-1 flex-col p-7 ${plan.badge ? "pt-4" : "pt-7"}`}>
+                  {/* Icon + name */}
+                  <div className="mb-5 flex items-center gap-3">
                     <div
-                      className={`flex h-9 w-9 items-center justify-center rounded-xl ${
+                      className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all ${
                         plan.highlighted
-                          ? "bg-blue-500/20 text-blue-300"
-                          : "bg-slate-100 text-slate-600"
+                          ? "bg-white/20 text-white backdrop-blur-sm"
+                          : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
                       }`}
                     >
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+                      <Icon className="h-5 w-5" strokeWidth={2} />
                     </div>
                     <p
                       className={`text-xs font-bold uppercase tracking-widest ${
-                        plan.highlighted ? "text-blue-300" : "text-slate-400"
+                        plan.highlighted ? "text-white/90" : "text-slate-400"
                       }`}
                     >
                       {plan.name}
                     </p>
                   </div>
 
-                  {/* price */}
+                  {/* Price */}
                   <div className="flex items-end gap-2">
                     <span
-                      className={`text-3xl font-extrabold tracking-tight ${
+                      className={`text-4xl font-extrabold tracking-tight ${
                         plan.highlighted ? "text-white" : "text-slate-900"
                       }`}
                     >
                       {plan.price === "Custom" ? "Custom" : "Flexible"}
                     </span>
                     <span
-                      className={`mb-1 text-xs ${
-                        plan.highlighted ? "text-blue-300" : "text-slate-400"
+                      className={`mb-1.5 text-xs font-medium ${
+                        plan.highlighted ? "text-white/80" : "text-slate-400"
                       }`}
                     >
                       pricing
                     </span>
                   </div>
 
-                  {/* hours badge */}
+                  {/* Hours badge */}
                   <span
-                    className={`mt-2 inline-flex w-fit rounded-full px-3 py-1 text-xs font-semibold ${plan.hoursBadge}`}
+                    className={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold ${plan.hoursBadge}`}
                   >
                     {plan.hours}
                   </span>
 
-                  {/* description */}
-                  <p className={`mt-3 text-sm leading-relaxed ${plan.highlighted ? "text-slate-300" : "text-slate-500"}`}>
+                  {/* Description */}
+                  <p
+                    className={`mt-4 text-sm leading-relaxed ${
+                      plan.highlighted ? "text-white/90" : "text-slate-500"
+                    }`}
+                  >
                     {plan.description}
                   </p>
 
-                  {/* selector */}
+                  {/* Options selector */}
                   {plan.options?.length > 0 && (
-                    <div className="mt-4">
-                      {/* ✅ Updated instruction text */}
-                      <p className={`mb-2 text-[11px] font-medium ${plan.highlighted ? "text-white/50" : "text-slate-400"}`}>
-                         Click a button below to view pricing details
+                    <div className="mt-5">
+                      <p
+                        className={`mb-3 text-xs font-medium ${
+                          plan.highlighted ? "text-white/80" : "text-slate-400"
+                        }`}
+                      >
+                        Click a button below to view pricing details
                       </p>
 
                       <div className="grid grid-cols-3 gap-2">
@@ -490,16 +558,24 @@ export default function Pricing() {
                                 bestFor: opt.bestFor,
                               })
                             }
-                            className={`rounded-xl border px-3 py-2 text-left transition ${
+                            className={`group/btn rounded-xl border px-3 py-2.5 text-left transition-all ${
                               plan.highlighted
-                                ? "border-white/10 bg-white/5 hover:bg-white/10"
-                                : "border-slate-200 bg-slate-50 hover:bg-white"
+                                ? "border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:scale-[1.02]"
+                                : "border-slate-200 bg-slate-50 hover:bg-white hover:border-[#289efd]/30 hover:shadow-md"
                             }`}
                           >
-                            <div className={`text-xs font-semibold ${plan.highlighted ? "text-white" : "text-slate-700"}`}>
+                            <div
+                              className={`text-xs font-bold ${
+                                plan.highlighted ? "text-white" : "text-slate-700"
+                              }`}
+                            >
                               {opt.label}
                             </div>
-                            <div className={`mt-1 text-[11px] ${plan.highlighted ? "text-white/70" : "text-slate-500"}`}>
+                            <div
+                              className={`mt-1 text-[11px] leading-tight ${
+                                plan.highlighted ? "text-white/80" : "text-slate-500"
+                              }`}
+                            >
                               {opt.value}
                             </div>
                           </button>
@@ -508,10 +584,16 @@ export default function Pricing() {
                     </div>
                   )}
 
-                  {/* divider */}
-                  <div className={`my-4 h-px ${plan.highlighted ? "bg-slate-700" : "bg-slate-100"}`} />
+                  {/* Divider */}
+                  <div
+                    className={`my-5 h-px ${
+                      plan.highlighted
+                        ? "bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        : "bg-slate-100"
+                    }`}
+                  />
 
-                  {/* features (collapsed by default) */}
+                  {/* Features */}
                   <FeatureList
                     features={plan.features}
                     highlighted={plan.highlighted}
@@ -520,17 +602,17 @@ export default function Pricing() {
                     setExpanded={setExpanded}
                   />
 
-                  {/* CTA pinned to bottom */}
+                  {/* CTA */}
                   <a
                     href="#contact"
-                    className={`mt-6 inline-flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold transition-all duration-200 ${
+                    className={`group/cta mt-6 inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold shadow-lg transition-all duration-300 hover:scale-[1.02] ${
                       plan.highlighted
-                        ? "bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-900/30"
-                        : "bg-slate-900 text-white hover:bg-slate-700"
+                        ? "bg-white text-[#289efd] shadow-white/20 hover:bg-white/95"
+                        : "bg-[#289efd] text-white shadow-[#289efd]/30 hover:bg-[#1e7dd8]"
                     }`}
                   >
                     {plan.cta}
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-1" />
                   </a>
                 </div>
               </div>
@@ -538,8 +620,9 @@ export default function Pricing() {
           })}
         </div>
 
-        <p className="mt-6 text-center text-xs text-slate-400">
-          Pricing varies by hours, role complexity, and specialization (Legal / Real Estate / Client Support).
+        <p className="mt-8 text-center text-xs text-slate-400">
+          Pricing varies by hours, role complexity, and specialization (Legal / Real Estate /
+          Client Support).
         </p>
       </div>
 

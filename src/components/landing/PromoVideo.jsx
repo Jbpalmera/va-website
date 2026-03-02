@@ -2,27 +2,23 @@ import promoVideo from "../../assets/prom-video.mp4";
 
 export default function PromoVideo() {
   return (
-    <section className="relative overflow-hidden py-20 bg-gradient-to-b from-black via-[#070b14] to-[#0b172a] border-y border-white/10">
-      {/* subtle background accents */}
+    <section className="relative overflow-hidden py-20 bg-gradient-to-b from-[#289efd] to-[#0a3f82]">
+      {/* subtle highlight like your card header */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[-140px] h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute right-[-180px] bottom-[-220px] h-[420px] w-[420px] rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_10%,rgba(255,255,255,0.06),transparent_55%)]" />
+        {/* soft top highlight */}
+        <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
+        {/* very subtle side glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6">
         {/* header */}
         <div className="mx-auto max-w-2xl text-center">
-          {/* <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold tracking-wide text-white/80">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            Product Demo
-          </span> */}
-
-          <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             See How It Works
           </h2>
 
-          <p className="mt-3 text-base leading-relaxed text-white/70 md:text-lg">
+          <p className="mt-3 text-base leading-relaxed text-white/85 md:text-lg">
             A quick walkthrough of how we help teams save time and scale faster
             with dedicated virtual support.
           </p>
@@ -30,11 +26,11 @@ export default function PromoVideo() {
 
         {/* video card */}
         <div className="mt-10 mx-auto max-w-5xl">
-          <div className="relative rounded-3xl border border-white/10 bg-white/5 p-3 shadow-[0_20px_70px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
-            {/* subtle top sheen */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-3xl bg-gradient-to-b from-white/10 to-transparent" />
+          <div className="relative rounded-[28px] border border-white/25 bg-white/10 p-4 backdrop-blur-md shadow-[0_20px_60px_-15px_rgba(0,0,0,0.45)]">
+            {/* gentle outer glow */}
+            <div className="pointer-events-none absolute -inset-[2px] rounded-[30px] bg-white/20 blur-[12px]" />
 
-            <div className="relative overflow-hidden rounded-2xl bg-black ring-1 ring-white/10">
+            <div className="relative overflow-hidden rounded-2xl bg-black/90 ring-1 ring-white/20">
               <video
                 src={promoVideo}
                 controls
@@ -44,48 +40,31 @@ export default function PromoVideo() {
               />
             </div>
 
-            {/* meta row */}
-            <div className="mt-4 flex flex-col gap-3 px-1 md:flex-row md:items-center md:justify-between">
-              {/* <p className="text-sm text-white/60">
-                ~2 min overview • Clear process • Real examples
-              </p> */}
-
-              {/* <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
-                  HD Playback
-                </span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
-                  Instant access
-                </span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
-                  No signup
-                </span>
-              </div> */}
+            <div className="mt-4 flex items-center justify-between px-1">
+              <p className="text-xs text-white/80">
+                Trusted by founders, agencies, and growing teams worldwide.
+              </p>
+              <span className="text-xs text-white/65">HD • ~2 min</span>
             </div>
           </div>
 
-          {/* micro trust text */}
-          <p className="mt-4 text-center text-xs text-white/50">
-            Trusted by founders, agencies, and growing teams worldwide.
-          </p>
-        </div>
+          {/* CTA row */}
+          <div className="mt-8 flex justify-center">
+            <a
+              href="#pricing"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-[#0a3f82] transition hover:opacity-95"
+            >
+              View Pricing
+              <span className="transition group-hover:translate-x-0.5">→</span>
+            </a>
 
-        {/* CTA */}
-        <div className="mt-8 flex justify-center">
-          <a
-            href="#pricing"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:opacity-95"
-          >
-            View Pricing
-            <span className="transition group-hover:translate-x-0.5">→</span>
-          </a>
-
-          <a
-            href="#contact"
-            className="ml-3 inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/0 px-6 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/5 hover:text-white"
-          >
-            Talk to us
-          </a>
+            <a
+              href="#contact"
+              className="ml-3 inline-flex items-center justify-center rounded-xl border border-white/35 bg-transparent px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
+            >
+              Talk to us
+            </a>
+          </div>
         </div>
       </div>
     </section>

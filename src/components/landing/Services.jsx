@@ -2,11 +2,10 @@ import { Headphones, Scale, Home, ArrowRight, MessagesSquare, FileText, Users } 
 
 const categories = [
   {
-    // label: "01",
     title: "Client Support\n& Revenue Specialists",
     tagline: "Strengthen relationships, improve response time, grow revenue",
-    gradient: "from-slate-800 to-slate-700",
-    accentBar: "bg-blue-500",
+    gradient: "from-[#289efd] to-[#0a3f82]",
+    accentBar: "bg-[#289efd]",
     lightBg: "bg-blue-50",
     lightText: "text-blue-600",
     borderAccent: "border-blue-100",
@@ -17,11 +16,10 @@ const categories = [
     ],
   },
   {
-    // label: "02",
     title: "Specialized\nLegal Virtual Assistants",
     tagline: "Structured legal admin support for fast-moving casework",
-    gradient: "from-slate-800 to-slate-700",
-    accentBar: "bg-indigo-500",
+    gradient: "from-[#289efd] to-[#0a3f82]",
+    accentBar: "bg-[#289efd]",
     lightBg: "bg-indigo-50",
     lightText: "text-indigo-600",
     borderAccent: "border-indigo-100",
@@ -32,11 +30,10 @@ const categories = [
     ],
   },
   {
-    // label: "03",
     title: "Real Estate\nVirtual Assistants",
     tagline: "Stay organized, respond faster, and close deals easier",
-    gradient: "from-slate-800 to-slate-700",
-    accentBar: "bg-emerald-500",
+    gradient: "from-[#289efd] to-[#0a3f82]",
+    accentBar: "bg-[#289efd]",
     lightBg: "bg-emerald-50",
     lightText: "text-emerald-600",
     borderAccent: "border-emerald-100",
@@ -50,7 +47,7 @@ const categories = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-hidden bg-white py-24">
+    <section id="services" className="relative overflow-hidden bg-[#e8f1fc] py-24">
       {/* Grid background */}
       <div
         aria-hidden

@@ -91,7 +91,7 @@ export default function Navbar() {
   const mobileItemActive = "text-slate-900 font-semibold";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-slate-100 bg-[#efeefe]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1350px] items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
         {/* Logo (Home) */}
         <button
@@ -166,7 +166,7 @@ export default function Navbar() {
           </a> */}
           <a
             href="#contact"
-            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
+            className="rounded-lg bg-[#ffffff] px-4 py-2 text-sm font-medium text-[#289efd] transition hover:bg-[#062d60] hover:text-white border border-[#289efd]"
           >
             Get Started
           </a>
