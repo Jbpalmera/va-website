@@ -1,3 +1,4 @@
+import React, { useId } from "react";
 import {
   MessageSquare,
   Users,
@@ -6,6 +7,30 @@ import {
   ArrowRight,
   MoveRight,
 } from "lucide-react";
+
+/** Metallic gold gradient for Lucide (stroke-based) SVG icons */
+function MetallicGoldIcon({ Icon, className = "", strokeWidth = 2.5 }) {
+  const gid = useId(); // unique per icon instance
+
+  return (
+    <Icon
+      className={className}
+      strokeWidth={strokeWidth}
+      stroke={`url(#gold-${gid})`}
+      fill="none"
+    >
+      <defs>
+        <linearGradient id={`gold-${gid}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#F7E7A1" />
+          <stop offset="28%" stopColor="#E3C766" />
+          <stop offset="55%" stopColor="#C9A227" />
+          <stop offset="78%" stopColor="#9E7C12" />
+          <stop offset="100%" stopColor="#F7E7A1" />
+        </linearGradient>
+      </defs>
+    </Icon>
+  );
+}
 
 const steps = [
   {
@@ -72,25 +97,34 @@ export default function HowItWorks() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => {
             const Icon = step.icon;
+
             return (
               <div key={step.number} className="relative flex flex-col">
                 {/* Arrow connector */}
                 {i < steps.length - 1 && (
                   <div className="absolute -right-3 top-12 z-10 hidden lg:flex items-center justify-center">
-                    <MoveRight className="h-5 w-5 text-white/50" strokeWidth={2} />
+                    <MoveRight
+                      className="h-5 w-5 text-white/50"
+                      strokeWidth={2}
+                    />
                   </div>
                 )}
 
                 <div className="group relative flex flex-col flex-1 overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] backdrop-blur-xl p-7 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] hover:border-white/40 hover:bg-white/[0.12]">
-                  
                   {/* Step number badge */}
                   <div className="absolute top-7 right-7 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
-                    <span className="text-sm font-bold text-white/70">{step.number}</span>
+                    <span className="text-sm font-bold text-white/70">
+                      {step.number}
+                    </span>
                   </div>
 
-                  {/* Icon container */}
-                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-white/20 to-white/5 border border-white/25 shadow-lg backdrop-blur-sm">
-                    <Icon className="h-6 w-6 text-white" strokeWidth={2} />
+                  {/* ✅ Icon container (matching Services header style) */}
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#062d60] shadow-sm ring-1 ring-white/10">
+                    <MetallicGoldIcon
+                      Icon={Icon}
+                      className="h-6 w-6"
+                      strokeWidth={2.4}
+                    />
                   </div>
 
                   {/* Title */}
@@ -106,12 +140,14 @@ export default function HowItWorks() {
                   {/* Detail badge */}
                   <div className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 border border-white/25 px-3.5 py-2 backdrop-blur-sm">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-                    <span className="text-xs font-medium text-white">{step.detail}</span>
+                    <span className="text-xs font-medium text-white">
+                      {step.detail}
+                    </span>
                   </div>
 
                   {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-white via-blue-200 to-transparent transition-all duration-500 ease-out group-hover:w-full" />
-                  
+
                   {/* Subtle corner gradient */}
                   <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-white/5 blur-2xl transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
                 </div>
