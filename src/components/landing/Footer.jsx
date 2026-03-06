@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="mt-6 flex gap-3">
               {/* Facebook */}
               <a
-                href="https://www.facebook.com/EmineceVASolutions"
+                href="https://www.facebook.com/profile.php?id=61585033890665"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -74,7 +74,7 @@ export default function Footer() {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/eminencevasolutions/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -92,7 +92,7 @@ export default function Footer() {
 
               {/* TikTok */}
               <a
-                href="https://www.tiktok.com/"
+                href="https://www.tiktok.com/@eminencevasolutions"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
