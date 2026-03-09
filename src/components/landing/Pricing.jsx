@@ -1,4 +1,5 @@
 import React, { useId, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2,
   ArrowRight,
@@ -255,6 +256,51 @@ const simpleTerms = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -26 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 26 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 function Modal({
   open,
   onClose,
@@ -270,145 +316,191 @@ function Modal({
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
   }, [open, onClose]);
 
-  if (!open) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-[999] flex items-center justify-center px-4"
-      role="dialog"
-      aria-modal="true"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-md" />
-
-      <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-[#289efd] to-[#0a3f82] shadow-2xl">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
-        </div>
-
-        <div
-          className="pointer-events-none absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-            backgroundSize: "32px 32px",
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[999] flex items-center justify-center px-4"
+          role="dialog"
+          aria-modal="true"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) onClose();
           }}
-        />
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-slate-900/90 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
 
-        <div className="relative flex items-start justify-between gap-4 border-b border-white/10 px-6 py-4">
-          <div>
-            <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 backdrop-blur-sm">
-              <span className="h-1 w-1 rounded-full bg-white" />
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white">
-                {planName} • {label}
-              </span>
-            </div>
-            <h3 className="mt-1.5 text-xl font-bold tracking-tight text-white">
-              Pricing Details
-            </h3>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-105"
-            aria-label="Close"
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+              scale: 0.97,
+              transition: { duration: 0.22 },
+            }}
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-[#289efd] to-[#0a3f82] shadow-2xl"
           >
-            <X className="h-4 w-4" strokeWidth={2} />
-          </button>
-        </div>
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
+            </div>
 
-        <div className="relative px-6 py-5">
-          <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
-            <div className="flex flex-col gap-3">
-              <div className="flex items-end justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold text-white/80">
-                    Selected Option
-                  </p>
-                  <p className="mt-1.5 text-4xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                    {price}
-                  </p>
+            <div
+              className="pointer-events-none absolute inset-0 opacity-5"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                backgroundSize: "32px 32px",
+              }}
+            />
+
+            <div className="relative flex items-start justify-between gap-4 border-b border-white/10 px-6 py-4">
+              <div>
+                <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 backdrop-blur-sm">
+                  <span className="h-1 w-1 rounded-full bg-white" />
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white">
+                    {planName} • {label}
+                  </span>
                 </div>
-
-                <span className="inline-flex items-center gap-1 rounded-full border border-amber-300/30 bg-amber-400/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-900 shadow-lg">
-                  <Sparkles className="h-3 w-3" />
-                  Flexible
-                </span>
+                <h3 className="mt-1.5 text-xl font-bold tracking-tight text-white">
+                  Pricing Details
+                </h3>
               </div>
 
-              {bestFor && (
-                <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
-                    Best for
-                  </p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-white">
-                    {bestFor}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-5">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="h-px flex-1 bg-white/10" />
-              <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
-                What's Included
-              </p>
-              <div className="h-px flex-1 bg-white/10" />
+              <motion.button
+                onClick={onClose}
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" strokeWidth={2} />
+              </motion.button>
             </div>
 
-            <ul className="space-y-2">
-              {bullets.map((b) => (
-                <li key={b} className="flex gap-2.5">
-                  <div className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center rounded-full bg-emerald-400/20">
-                    <CheckCircle2
-                      className="h-3.5 w-3.5 text-emerald-300"
-                      strokeWidth={2.5}
-                    />
+            <div className="relative px-6 py-5">
+              <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-end justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-white/80">
+                        Selected Option
+                      </p>
+                      <p className="mt-1.5 text-4xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                        {price}
+                      </p>
+                    </div>
+
+                    <motion.span
+                      animate={{ scale: [1, 1.04, 1] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                      className="inline-flex items-center gap-1 rounded-full border border-amber-300/30 bg-amber-400/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-900 shadow-lg"
+                    >
+                      <Sparkles className="h-3 w-3" />
+                      Flexible
+                    </motion.span>
                   </div>
-                  <span className="text-xs leading-relaxed text-white/90">
-                    {b}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-            <a
-              href="#contact"
-              onClick={onClose}
-              className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#289efd] shadow-xl transition-all hover:scale-[1.02] hover:bg-white/95"
-            >
-              Continue to Consultation
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </a>
+                  {bestFor && (
+                    <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
+                        Best for
+                      </p>
+                      <p className="mt-1.5 text-xs leading-relaxed text-white">
+                        {bestFor}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
 
-            <button
-              onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              Close
-            </button>
-          </div>
+              <div className="mt-5">
+                <div className="mb-3 flex items-center gap-2">
+                  <div className="h-px flex-1 bg-white/10" />
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">
+                    What's Included
+                  </p>
+                  <div className="h-px flex-1 bg-white/10" />
+                </div>
 
-          <div className="mt-4 rounded-lg border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
-            <p className="text-[10px] leading-relaxed text-white/70">
-              <span className="font-semibold text-white/90">Note:</span> Final
-              pricing is determined by scope of work, required hours, level of
-              specialization, and operational complexity.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+                <ul className="space-y-2">
+                  {bullets.map((b, idx) => (
+                    <motion.li
+                      key={b}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.25, delay: idx * 0.05 }}
+                      className="flex gap-2.5"
+                    >
+                      <div className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center rounded-full bg-emerald-400/20">
+                        <CheckCircle2
+                          className="h-3.5 w-3.5 text-emerald-300"
+                          strokeWidth={2.5}
+                        />
+                      </div>
+                      <span className="text-xs leading-relaxed text-white/90">
+                        {b}
+                      </span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+                <motion.a
+                  href="#contact"
+                  onClick={onClose}
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#289efd] shadow-xl transition-all hover:bg-white/95"
+                >
+                  Continue to Consultation
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </motion.a>
+
+                <motion.button
+                  onClick={onClose}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                >
+                  Close
+                </motion.button>
+              </div>
+
+              <div className="mt-4 rounded-lg border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
+                <p className="text-[10px] leading-relaxed text-white/70">
+                  <span className="font-semibold text-white/90">Note:</span> Final
+                  pricing is determined by scope of work, required hours, level of
+                  specialization, and operational complexity.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -427,31 +519,43 @@ function FeatureList({
   return (
     <div>
       <ul className="space-y-2.5">
-        {visible.map((f) => (
-          <li key={f} className="flex items-start gap-3">
-            <CheckCircle2
-              className={`mt-0.5 h-4 w-4 flex-none ${
-                highlighted ? "text-white" : "text-emerald-500"
-              }`}
-              strokeWidth={2.5}
-            />
-            <span
-              className={`text-[13px] leading-relaxed ${
-                highlighted ? "text-white/90" : "text-slate-600"
-              }`}
+        <AnimatePresence initial={false}>
+          {visible.map((f, idx) => (
+            <motion.li
+              key={f}
+              layout
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, delay: idx * 0.03 }}
+              className="flex items-start gap-3"
             >
-              {f}
-            </span>
-          </li>
-        ))}
+              <CheckCircle2
+                className={`mt-0.5 h-4 w-4 flex-none ${
+                  highlighted ? "text-white" : "text-emerald-500"
+                }`}
+                strokeWidth={2.5}
+              />
+              <span
+                className={`text-[13px] leading-relaxed ${
+                  highlighted ? "text-white/90" : "text-slate-600"
+                }`}
+              >
+                {f}
+              </span>
+            </motion.li>
+          ))}
+        </AnimatePresence>
       </ul>
 
       {hasMore && (
-        <button
+        <motion.button
           type="button"
           onClick={() =>
             setExpanded((prev) => ({ ...prev, [planKey]: !prev[planKey] }))
           }
+          whileHover={{ x: 2 }}
+          whileTap={{ scale: 0.98 }}
           className={`mt-4 inline-flex items-center gap-2 text-xs font-semibold transition-all hover:gap-3 ${
             highlighted
               ? "text-white/90 hover:text-white"
@@ -467,7 +571,7 @@ function FeatureList({
               View all features <ChevronDown className="h-4 w-4" />
             </>
           )}
-        </button>
+        </motion.button>
       )}
     </div>
   );
@@ -522,44 +626,90 @@ export default function Pricing() {
         }}
       />
 
+      {/* subtle animated glows */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -left-16 top-8 h-72 w-72 rounded-full bg-blue-200/20 blur-3xl"
+        animate={{ scale: [1, 1.08, 1], opacity: [0.18, 0.32, 0.18] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-indigo-200/20 blur-3xl"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.16, 0.28, 0.16] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      />
+
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto mb-12 max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#289efd]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#289efd]" />
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mx-auto mb-12 max-w-3xl text-center"
+        >
+          <motion.span
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#289efd]"
+          >
+            <motion.span
+              className="h-1.5 w-1.5 rounded-full bg-[#289efd]"
+              animate={{ scale: [1, 1.22, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
             Flexible Service Plans
-          </span>
+          </motion.span>
 
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <motion.h2
+            variants={fadeUp}
+            className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
+          >
             Flexible &{" "}
             <span className="bg-gradient-to-r from-[#289efd] to-[#1e7dd8] bg-clip-text text-transparent">
               Negotiable Pricing
             </span>
-          </h2>
+          </motion.h2>
 
-          <p className="mt-4 text-sm leading-relaxed text-slate-500">
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-sm leading-relaxed text-slate-500"
+          >
             We offer flexible service structures designed to align with your
             workload, budget, and growth goals instead of locking you into rigid
             packages.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Cards */}
-        <div className="grid gap-6 lg:grid-cols-3 items-stretch">
-          {plans.map((plan) => {
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid items-stretch gap-6 lg:grid-cols-3"
+        >
+          {plans.map((plan, idx) => {
             const Icon = plan.icon;
 
             return (
-              <div
+              <motion.div
                 key={plan.name}
+                variants={idx === 1 ? fadeUp : idx === 0 ? fadeLeft : fadeRight}
+                whileHover={{ y: -8, scale: plan.highlighted ? 1.055 : 1.01 }}
+                transition={{ duration: 0.25 }}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border transition-all duration-300 ${
                   plan.highlighted
                     ? "border-[#289efd]/30 bg-gradient-to-b from-[#289efd] to-[#0a3f82] text-white shadow-2xl shadow-[#289efd]/25 lg:-mt-4 lg:scale-105"
-                    : "border-slate-200 bg-white shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-slate-300"
+                    : "border-slate-200 bg-white shadow-sm hover:border-slate-300 hover:shadow-xl"
                 }`}
               >
-                <span
-                  className={`absolute top-0 left-0 h-1.5 w-full ${plan.accentBar}`}
+                <motion.span
+                  initial={{ scaleX: 0, originX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className={`absolute left-0 top-0 h-1.5 w-full ${plan.accentBar}`}
                 />
 
                 {plan.highlighted && (
@@ -582,10 +732,16 @@ export default function Pricing() {
 
                 {plan.badge && (
                   <div className="flex justify-center pt-5">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-4 py-1 text-xs font-bold uppercase tracking-wide text-slate-900 shadow-lg">
+                    <motion.span
+                      initial={{ opacity: 0, y: -8, scale: 0.92 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.35, delay: 0.15 }}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-4 py-1 text-xs font-bold uppercase tracking-wide text-slate-900 shadow-lg"
+                    >
                       <Sparkles className="h-3.5 w-3.5" />
                       {plan.badge}
-                    </span>
+                    </motion.span>
                   </div>
                 )}
 
@@ -595,13 +751,17 @@ export default function Pricing() {
                   }`}
                 >
                   <div className="mb-5 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#062d60] shadow-sm ring-1 ring-white/10">
+                    <motion.div
+                      whileHover={{ rotate: -4, scale: 1.06 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#062d60] shadow-sm ring-1 ring-white/10"
+                    >
                       <MetallicGoldIcon
                         Icon={Icon}
                         className="h-5 w-5"
                         strokeWidth={2.4}
                       />
-                    </div>
+                    </motion.div>
 
                     <p
                       className={`text-xs font-bold uppercase tracking-widest ${
@@ -613,7 +773,7 @@ export default function Pricing() {
                   </div>
 
                   {plan.highlighted ? (
-                    <div className="flex items-end gap-3 flex-wrap">
+                    <div className="flex flex-wrap items-end gap-3">
                       <span className="inline-flex items-center rounded-xl bg-[#062d60] px-4 py-2 shadow-sm ring-1 ring-white/10">
                         <span
                           className={`text-4xl font-extrabold tracking-tight ${GOLD_TEXT}`}
@@ -626,7 +786,7 @@ export default function Pricing() {
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-end gap-3 flex-wrap">
+                    <div className="flex flex-wrap items-end gap-3">
                       <span className="inline-flex items-center rounded-xl bg-[#289efd] px-4 py-2 shadow-sm">
                         <span className="text-4xl font-extrabold tracking-tight text-white">
                           {plan.price}
@@ -663,8 +823,8 @@ export default function Pricing() {
                       </p>
 
                       <div className="grid grid-cols-3 gap-2">
-                        {plan.options.map((opt) => (
-                          <button
+                        {plan.options.map((opt, optIdx) => (
+                          <motion.button
                             key={opt.key}
                             type="button"
                             onClick={() =>
@@ -676,10 +836,20 @@ export default function Pricing() {
                                 bestFor: opt.bestFor,
                               })
                             }
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.3,
+                              delay: optIdx * 0.05,
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                            whileHover={{ y: -2, scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             className={`group/btn rounded-xl border px-3 py-2.5 text-left transition-all ${
                               plan.highlighted
-                                ? "border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:scale-[1.02]"
-                                : "border-slate-200 bg-slate-50 hover:bg-white hover:border-[#289efd]/30 hover:shadow-md"
+                                ? "border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                                : "border-slate-200 bg-slate-50 hover:border-[#289efd]/30 hover:bg-white hover:shadow-md"
                             }`}
                           >
                             <div
@@ -700,7 +870,7 @@ export default function Pricing() {
                             >
                               {opt.value}
                             </div>
-                          </button>
+                          </motion.button>
                         ))}
                       </div>
                     </div>
@@ -722,9 +892,11 @@ export default function Pricing() {
                     setExpanded={setExpanded}
                   />
 
-                  <a
+                  <motion.a
                     href="#contact"
-                    className={`group/cta mt-6 inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold shadow-lg transition-all duration-300 hover:scale-[1.02] ${
+                    whileHover={{ scale: 1.02, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`group/cta mt-6 inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold shadow-lg transition-all duration-300 ${
                       plan.highlighted
                         ? "bg-white text-[#289efd] shadow-white/20 hover:bg-white/95"
                         : "bg-[#289efd] text-white shadow-[#289efd]/30 hover:bg-[#1e7dd8]"
@@ -732,19 +904,31 @@ export default function Pricing() {
                   >
                     {plan.cta}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-1" />
-                  </a>
+                  </motion.a>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Transparent & Competitive Pricing */}
-        <div className="mt-14 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          whileHover={{ y: -4 }}
+          transition={{ duration: 0.25 }}
+          className="mt-14 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
+        >
           <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-emerald-600">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <motion.span
+                  className="h-1.5 w-1.5 rounded-full bg-emerald-500"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                />
                 Transparent & Competitive Pricing
               </span>
 
@@ -761,40 +945,64 @@ export default function Pricing() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {pricingFactors.map((factor) => (
-                <div
+              {pricingFactors.map((factor, idx) => (
+                <motion.div
                   key={factor}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.8 }}
+                  transition={{
+                    duration: 0.35,
+                    delay: idx * 0.05,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  whileHover={{ y: -2, scale: 1.01 }}
                   className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700"
                 >
                   <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-emerald-500 shadow-sm">
                     <ShieldCheck className="h-4 w-4" strokeWidth={2.5} />
                   </span>
                   {factor}
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* In simple terms */}
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-8 grid gap-4 md:grid-cols-3"
+        >
           {simpleTerms.map((item) => (
-            <div
+            <motion.div
               key={item.title}
+              variants={fadeUp}
+              whileHover={{ y: -4, scale: 1.01 }}
+              transition={{ duration: 0.25 }}
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
             >
               <h4 className="text-lg font-bold text-slate-900">{item.title}</h4>
               <p className="mt-2 text-sm leading-relaxed text-slate-500">
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-8 text-center text-xs text-slate-400">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 text-center text-xs text-slate-400"
+        >
           Final pricing varies based on workload, hours required, specialization,
           and operational complexity.
-        </p>
+        </motion.p>
       </div>
 
       <Modal

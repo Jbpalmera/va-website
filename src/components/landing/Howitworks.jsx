@@ -1,4 +1,5 @@
 import React, { useId } from "react";
+import { motion } from "framer-motion";
 import {
   MessageSquare,
   Users,
@@ -10,7 +11,7 @@ import {
 
 /** Metallic gold gradient for Lucide (stroke-based) SVG icons */
 function MetallicGoldIcon({ Icon, className = "", strokeWidth = 2.5 }) {
-  const gid = useId(); // unique per icon instance
+  const gid = useId();
 
   return (
     <Icon
@@ -67,6 +68,27 @@ const steps = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
 export default function HowItWorks() {
   return (
     <section
@@ -78,97 +100,216 @@ export default function HowItWorks() {
         <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.25),transparent_60%)]" />
       </div>
 
+      {/* Animated glow accents */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -left-16 top-10 h-72 w-72 rounded-full bg-white/10 blur-3xl"
+        animate={{ scale: [1, 1.08, 1], opacity: [0.18, 0.3, 0.18] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-cyan-200/10 blur-3xl"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.12, 0.24, 0.12] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      />
+
       <div className="relative mx-auto max-w-[1350px] px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto mb-16 max-w-2xl text-center">
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mx-auto mb-16 max-w-2xl text-center"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl"
+          >
             How It{" "}
             <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
               Works
             </span>
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/90">
+          </motion.h2>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-base leading-relaxed text-white/90"
+          >
             From your first call to your first task completed, we handle
             everything in between.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Steps */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {steps.map((step, i) => {
             const Icon = step.icon;
 
             return (
-              <div key={step.number} className="relative flex flex-col">
+              <motion.div
+                key={step.number}
+                variants={fadeUp}
+                className="relative flex flex-col"
+              >
                 {/* Arrow connector */}
                 {i < steps.length - 1 && (
-                  <div className="absolute -right-3 top-12 z-10 hidden lg:flex items-center justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 + 0.2, duration: 0.45 }}
+                    className="absolute -right-3 top-12 z-10 hidden items-center justify-center lg:flex"
+                  >
                     <MoveRight
                       className="h-5 w-5 text-white/50"
                       strokeWidth={2}
                     />
-                  </div>
+                  </motion.div>
                 )}
 
-                <div className="group relative flex flex-col flex-1 overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] backdrop-blur-xl p-7 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] hover:border-white/40 hover:bg-white/[0.12]">
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  transition={{ duration: 0.25 }}
+                  className="group relative flex flex-1 flex-col overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] p-7 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-white/40 hover:bg-white/[0.12] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)]"
+                >
                   {/* Step number badge */}
-                  <div className="absolute top-7 right-7 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 + 0.15, duration: 0.4 }}
+                    className="absolute right-7 top-7 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm"
+                  >
                     <span className="text-sm font-bold text-white/70">
                       {step.number}
                     </span>
-                  </div>
+                  </motion.div>
 
-                  {/* ✅ Icon container (matching Services header style) */}
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#062d60] shadow-sm ring-1 ring-white/10">
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ rotate: -5, scale: 1.06 }}
+                    transition={{ duration: 0.25 }}
+                    className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#062d60] shadow-sm ring-1 ring-white/10"
+                  >
                     <MetallicGoldIcon
                       Icon={Icon}
                       className="h-6 w-6"
                       strokeWidth={2.4}
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Title */}
-                  <h3 className="mb-3 text-lg font-bold leading-tight text-white pr-8">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: i * 0.08 + 0.18,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="mb-3 pr-8 text-lg font-bold leading-tight text-white"
+                  >
                     {step.title}
-                  </h3>
+                  </motion.h3>
 
                   {/* Description */}
-                  <p className="flex-1 text-sm leading-relaxed text-white/80 mb-5">
+                  <motion.p
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: i * 0.08 + 0.24,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="mb-5 flex-1 text-sm leading-relaxed text-white/80"
+                  >
                     {step.description}
-                  </p>
+                  </motion.p>
 
                   {/* Detail badge */}
-                  <div className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 border border-white/25 px-3.5 py-2 backdrop-blur-sm">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: i * 0.08 + 0.3,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-2 backdrop-blur-sm"
+                  >
+                    <motion.span
+                      className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+                      animate={{ scale: [1, 1.25, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
                     <span className="text-xs font-medium text-white">
                       {step.detail}
                     </span>
-                  </div>
+                  </motion.div>
 
                   {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-white via-blue-200 to-transparent transition-all duration-500 ease-out group-hover:w-full" />
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: i * 0.08 + 0.35,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-white via-blue-200 to-transparent"
+                  />
 
                   {/* Subtle corner gradient */}
-                  <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-white/5 blur-2xl transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
-                </div>
-              </div>
+                  <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-white/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="mt-16 flex flex-col items-center gap-4">
-          <p className="text-sm text-white/80 font-medium">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-16 flex flex-col items-center gap-4"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-sm font-medium text-white/80"
+          >
             No commitment required, start with a free consultation
-          </p>
-          <a
+          </motion.p>
+
+          <motion.a
+            variants={fadeUp}
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a3f82] shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:bg-blue-50"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a3f82] shadow-xl transition-all duration-300 hover:bg-blue-50 hover:shadow-2xl"
           >
             Get Started Today
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
+            <motion.span
+              animate={{ x: [0, 3, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight className="h-4 w-4" />
+            </motion.span>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

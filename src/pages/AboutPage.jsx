@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
 // import FloatingChat from "../components/FloatingChat";
@@ -8,39 +9,107 @@ import ceoImage from "../assets/ceo-ramy.jpeg";
 import amaniyImage from "../assets/amaniy.jpeg";
 import nicoImage from "../assets/nico.jpeg";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 35 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const staggerWrap = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <main>
+      <main className="overflow-hidden">
         {/* ================= HERO SECTION ================= */}
-        <section className="bg-white pt-20 pb-16 sm:pt-24 sm:pb-20">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8 text-center">
-            {/* Bigger Logo */}
-            <img
+        <section className="relative bg-white pb-16 pt-20 sm:pb-20 sm:pt-24">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-100/40 blur-3xl" />
+            <div className="absolute right-10 top-24 h-40 w-40 rounded-full bg-cyan-100/40 blur-3xl" />
+          </div>
+
+          <motion.div
+            variants={staggerWrap}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="relative mx-auto max-w-[1200px] px-6 text-center lg:px-8"
+          >
+            <motion.img
+              variants={fadeUp}
               src={logo}
               alt="Eminence VA Solutions Logo"
-              className="mx-auto mb-10 w-72 sm:w-96 object-contain"
+              className="mx-auto mb-10 w-72 object-contain sm:w-96"
             />
 
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <motion.h1
+              variants={fadeUp}
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+            >
               About Eminence VA Solutions
-            </h1>
+            </motion.h1>
 
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-4 max-w-2xl text-lg text-slate-600"
+            >
               We help founders, startups, and growing businesses delegate
               smarter, operate faster, and scale without hiring full-time
               overhead.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </section>
 
         {/* ================= Mission & Vision ================= */}
-        <section className="bg-white py-20 sm:py-24 border-t border-slate-100">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        <section className="border-t border-slate-100 bg-white py-20 sm:py-24">
+          <motion.div
+            variants={staggerWrap}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mx-auto max-w-[1200px] px-6 lg:px-8"
+          >
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
-              <div>
+              <motion.div variants={fadeLeft}>
                 <h3 className="text-xl font-semibold text-slate-900">
                   Our Mission
                 </h3>
@@ -60,42 +129,68 @@ export default function AboutPage() {
                   talented virtual assistants with structured systems, we help
                   companies grow with confidence.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="rounded-2xl bg-slate-50 p-10 shadow-sm text-center">
+              <motion.div
+                variants={fadeRight}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ duration: 0.25 }}
+                className="rounded-2xl border border-slate-100 bg-slate-50 p-10 text-center shadow-sm"
+              >
                 <p className="text-xl font-semibold text-slate-900">
                   Structured Systems. Elite Virtual Talent.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================= Executive Leadership Header ================= */}
-        <section className="bg-slate-50 pt-20 pb-4 sm:pt-24 border-t border-slate-100">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600">
+        <section className="border-t border-slate-100 bg-slate-50 pb-4 pt-20 sm:pt-24">
+          <motion.div
+            variants={staggerWrap}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mx-auto max-w-[1200px] px-6 text-center lg:px-8"
+          >
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-blue-600"
+            >
               <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
               Leadership
-            </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            </motion.span>
+
+            <motion.h2
+              variants={fadeUp}
+              className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+            >
               Executive Leadership Team
-            </h2>
-            <p className="mt-3 text-base text-slate-500 max-w-xl mx-auto">
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-3 max-w-xl text-base text-slate-500"
+            >
               The people behind the vision, operations, and growth of Eminence
               VA Solutions.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </section>
 
-        {/* ================= CEO Section ================= */}
+        {/* ================= RAMY SECTION ================= */}
         <section className="bg-slate-50 py-20 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mx-auto max-w-[1200px] px-6 lg:px-8"
+          >
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
-              {/* Content LEFT */}
-              <div>
-                <span className="inline-flex items-center rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white mb-4">
-                  President & Chief Executive Officer
+              <motion.div variants={fadeLeft}>
+                <span className="mb-4 inline-flex items-center rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
+                  President, CEO & CFO
                 </span>
 
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -103,83 +198,107 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="mt-6 leading-relaxed text-slate-600">
-                  As President and Chief Executive Officer of Eminence VA
-                  Solutions, Ramy sets the company's overall vision, mission,
-                  and long-term strategy. He makes final executive decisions,
-                  oversees the executive leadership team, and approves major
-                  financial and operational plans.
+                  Ramy Elsaeed serves as the President, Chief Executive Officer,
+                  and Chief Financial Officer of Eminence VA Solutions. As
+                  President, he leads the company’s overall direction, defines
+                  its long-term vision, and ensures that every department stays
+                  aligned with the organization’s mission, standards, and growth
+                  objectives.
                 </p>
 
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  Ramy represents the company publicly and legally, leads
-                  high-level partnerships, and drives the company's continued
-                  expansion across industries. His leadership emphasizes
-                  accountability, performance, and building long-term client
-                  relationships built on measurable value.
+                  As CEO, Ramy makes final executive decisions, oversees the
+                  leadership team, drives strategic partnerships, and represents
+                  the company in high-level business relationships. As CFO, he
+                  also oversees financial strategy, budgeting, planning, and
+                  fiscal accountability to ensure sustainable and responsible
+                  growth across the company.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Image RIGHT */}
-              <div>
+              <motion.div
+                variants={fadeRight}
+                whileHover={{ y: -8, scale: 1.015 }}
+                transition={{ duration: 0.28 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-200/20 to-cyan-100/20 blur-2xl" />
                 <img
                   src={ceoImage}
-                  alt="Ramy Elsaeed - President & CEO of Eminence VA Solutions"
-                  className="w-[420px] h-[520px] object-cover object-top rounded-2xl shadow-xl mx-auto"
+                  alt="Ramy Elsaeed - President, CEO, and CFO of Eminence VA Solutions"
+                  className="relative mx-auto h-[520px] w-[420px] rounded-2xl border border-white/60 object-cover object-top shadow-xl"
                 />
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
-        {/* ================= VP External Affairs Section ================= */}
-        <section className="bg-white py-20 sm:py-24 border-t border-slate-100">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        {/* ================= AMANIY SECTION ================= */}
+        <section className="border-t border-slate-100 bg-white py-20 sm:py-24">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mx-auto max-w-[1200px] px-6 lg:px-8"
+          >
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
-              {/* Image LEFT */}
-              <div>
+              <motion.div
+                variants={fadeLeft}
+                whileHover={{ y: -8, scale: 1.015 }}
+                transition={{ duration: 0.28 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-indigo-200/20 to-sky-100/20 blur-2xl" />
                 <img
                   src={amaniyImage}
-                  alt="Amaniy Ahmad - Vice President External Affairs & CFO of Eminence VA Solutions"
-                  className="w-[420px] h-[520px] object-cover object-top rounded-2xl shadow-xl mx-auto"
+                  alt="Amaniy Ahmad - Vice President, CMO, and COO of Eminence VA Solutions"
+                  className="relative mx-auto h-[520px] w-[420px] rounded-2xl border border-white/60 object-cover object-top shadow-xl"
                 />
-              </div>
+              </motion.div>
 
-              {/* Content RIGHT */}
-              <div>
-                <span className="inline-flex items-center rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white mb-4">
-                  Vice President — External Affairs & Chief Financial Officer
+              <motion.div variants={fadeRight}>
+                <span className="mb-4 inline-flex items-center rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
+                  Vice President, CMO & COO
                 </span>
 
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                  AMANIY AHMAD
+                  Amaniy Ahmad
                 </h2>
 
                 <p className="mt-6 leading-relaxed text-slate-600">
-                  As Vice President of External Affairs and Chief Financial
-                  Officer, Amaniy oversees the company’s marketing, branding,
-                  and strategic partnerships while also directing financial
-                  strategy and fiscal oversight.
+                  Amaniy Ahmad serves as the Vice President, Chief Marketing
+                  Officer, and Chief Operations Officer of Eminence VA
+                  Solutions. As Vice President, she supports executive
+                  leadership, helps guide company-wide initiatives, and ensures
+                  strategic priorities are translated into measurable action
+                  across the organization.
                 </p>
 
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  Amaniy manages budgeting, financial planning, and performance
-                  reporting while leading client acquisition and external growth
-                  strategies, positioning Eminence VA Solutions for scalable,
-                  responsible expansion.
+                  As CMO, Amaniy leads branding, marketing strategy, market
+                  positioning, and client-facing growth efforts that strengthen
+                  visibility and acquisition. As COO, she oversees operational
+                  systems, workflow execution, internal coordination, and
+                  day-to-day performance to ensure the company delivers a smooth,
+                  efficient, and scalable client experience.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
-        {/* ================= BDM Section ================= */}
-        <section className="bg-slate-50 py-20 sm:py-24 border-t border-slate-100">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        {/* ================= NICO SECTION ================= */}
+        <section className="border-t border-slate-100 bg-slate-50 py-20 sm:py-24">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mx-auto max-w-[1200px] px-6 lg:px-8"
+          >
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
-              {/* Content LEFT */}
-              <div>
-                <span className="inline-flex items-center rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white mb-4">
-                  Business Development Manager
+              <motion.div variants={fadeLeft}>
+                <span className="mb-4 inline-flex items-center rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
+                  Business Development Representative & Social Media Director
                 </span>
 
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -187,30 +306,39 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="mt-6 leading-relaxed text-slate-600">
-                  Our Business Development Manager is responsible for
-                  identifying new growth opportunities, building strategic
-                  partnerships, and expanding our client base.
+                  Nico Paolo Taruc serves as the Business Development
+                  Representative and Social Media Director of Eminence VA
+                  Solutions. As Business Development Representative, Nico
+                  identifies growth opportunities, builds relationships with
+                  prospective clients, supports outreach efforts, and helps move
+                  leads through the sales pipeline with professionalism and
+                  consistency.
                 </p>
 
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  The BDM works closely with potential clients to understand
-                  their needs, present tailored solutions, and guide them
-                  through the onboarding process. This role focuses on
-                  strengthening relationships, generating new business, and
-                  helping drive the company’s long-term growth and success.
+                  As Social Media Director, Nico oversees content direction,
+                  platform presence, digital engagement, and brand consistency
+                  across social channels. This role supports both business growth
+                  and market visibility by helping Eminence VA Solutions connect
+                  with the right audience and maintain a strong online presence.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Image RIGHT */}
-              <div>
+              <motion.div
+                variants={fadeRight}
+                whileHover={{ y: -8, scale: 1.015 }}
+                transition={{ duration: 0.28 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-emerald-200/20 to-lime-100/20 blur-2xl" />
                 <img
                   src={nicoImage}
-                  alt="Nico Paolo Taruc - Business Development Manager of Eminence VA Solutions"
-                  className="w-[420px] h-auto object-contain rounded-2xl shadow-xl mx-auto"
+                  alt="Nico Paolo Taruc - Business Development Representative and Social Media Director of Eminence VA Solutions"
+                  className="relative mx-auto h-[520px] w-[420px] rounded-2xl border border-white/60 object-cover object-top shadow-xl"
                 />
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 
