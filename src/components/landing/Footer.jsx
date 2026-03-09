@@ -1,35 +1,108 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo1.png";
 
-const links = {
+const footerLinks = {
   Services: [
-    "General VA",
-    "Executive Assistant",
-    "Real Estate VA",
-    "Healthcare VA",
-    "Digital Marketing VA",
-    "Sales Dev Rep",
+    { label: "Law Firms", href: "#services" },
+    { label: "Credit Repair Companies", href: "#services" },
+    { label: "Business Funding & Financial", href: "#services" },
+    { label: "Debt Relief & Settlement", href: "#services" },
+    { label: "Real Estate & Investors", href: "#services" },
+    { label: "Tax Preparation & Accounting", href: "#services" },
+    { label: "Startups & Growing Businesses", href: "#services" },
+    { label: "Spanish-Speaking Markets", href: "#services" },
   ],
-  Company: ["About Us", "Careers", "Blog", "Press"],
-  Support: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"],
+  Company: [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" },
+  ],
+  Support: [
+    { label: "Contact Us", href: "#contact" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+  ],
 };
 
 export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleHomeNav = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSectionNav = (hash) => {
+    const id = hash.replace("#", "");
+
+    if (location.pathname !== "/") {
+      navigate({ pathname: "/", hash });
+      return;
+    }
+
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const renderFooterLink = (item) => {
+    if (item.href === "/") {
+      return (
+        <button
+          type="button"
+          onClick={handleHomeNav}
+          className="text-left text-sm text-white/80 transition-colors hover:text-white"
+        >
+          {item.label}
+        </button>
+      );
+    }
+
+    if (item.href.startsWith("#")) {
+      return (
+        <button
+          type="button"
+          onClick={() => handleSectionNav(item.href)}
+          className="text-left text-sm text-white/80 transition-colors hover:text-white"
+        >
+          {item.label}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        to={item.href}
+        className="text-sm text-white/80 transition-colors hover:text-white"
+      >
+        {item.label}
+      </Link>
+    );
+  };
+
   return (
     <footer className="relative overflow-hidden border-t border-[#289efd]/20 bg-gradient-to-b from-[#289efd] to-[#0a3f82] text-white">
-      {/* Gradient highlight effects - matching PromoVideo */}
+      {/* Gradient highlight effects */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Soft top highlight */}
         <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_50%_0%,rgba(255,255,255,0.22),transparent_60%)]" />
-        {/* Subtle side glow */}
         <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_85%_45%,rgba(255,255,255,0.10),transparent_70%)]" />
       </div>
 
-      {/* Background patterns */}
+      {/* Background pattern */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-5"
         style={{
-          backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+          backgroundImage:
+            "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -52,15 +125,30 @@ export default function Footer() {
               businesses.
             </p>
 
+            {/* Contact Info */}
+            <div className="mt-6 space-y-3">
+              <a
+                href="tel:+18888691744"
+                className="block text-sm text-white/85 transition-colors hover:text-white"
+              >
+                (888) 869-1744
+              </a>
+              <a
+                href="mailto:support@eminencevasolutions.com"
+                className="block break-all text-sm text-white/85 transition-colors hover:text-white"
+              >
+                support@eminencevasolutions.com
+              </a>
+            </div>
+
             {/* Social Icons */}
             <div className="mt-6 flex gap-3">
-              {/* Facebook */}
               <a
                 href="https://www.facebook.com/profile.php?id=61585033890665"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/20 hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,13 +160,12 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* Instagram */}
               <a
                 href="https://www.instagram.com/eminencevasolutions/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/20 hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -90,13 +177,12 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* TikTok */}
               <a
                 href="https://www.tiktok.com/@eminencevasolutions"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/20 hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,13 +194,12 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/20 hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,19 +213,16 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Link Columns */}
-          {Object.entries(links).map(([heading, items]) => (
+          {/* Footer Link Columns */}
+          {Object.entries(footerLinks).map(([heading, items]) => (
             <div key={heading}>
               <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
                 {heading}
               </h4>
+
               <ul className="space-y-3">
                 {items.map((item) => (
-                  <li key={item}>
-                    <span className="cursor-default text-sm text-white/80 transition-colors hover:text-white">
-                      {item}
-                    </span>
-                  </li>
+                  <li key={item.label}>{renderFooterLink(item)}</li>
                 ))}
               </ul>
             </div>
@@ -155,9 +237,25 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-6 text-xs">
-            <span className="cursor-default transition-colors hover:text-white">Privacy Policy</span>
-            <span className="cursor-default transition-colors hover:text-white">Terms of Service</span>
-            <span className="cursor-default transition-colors hover:text-white">Cookie Policy</span>
+            <Link
+              to="/privacy-policy"
+              className="transition-colors hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-of-service"
+              className="transition-colors hover:text-white"
+            >
+              Terms of Service
+            </Link>
+            <button
+              type="button"
+              onClick={() => handleSectionNav("#contact")}
+              className="transition-colors hover:text-white"
+            >
+              Contact Us
+            </button>
           </div>
         </div>
       </div>
