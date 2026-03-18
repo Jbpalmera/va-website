@@ -10,7 +10,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   // { label: "Use Cases", href: "#usecases" },
   { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 export default function Navbar() {

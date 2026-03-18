@@ -190,7 +190,7 @@ export default function AboutPage() {
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <motion.div variants={fadeLeft}>
                 <span className="mb-4 inline-flex items-center rounded-full bg-blue-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
-                  President, CEO & CFO
+                  President, Co-Founder, CEO & CFO
                 </span>
 
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -198,21 +198,22 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="mt-6 leading-relaxed text-slate-600">
-                  Ramy Elsaeed serves as the President, Chief Executive Officer,
-                  and Chief Financial Officer of Eminence VA Solutions. As
-                  President, he leads the company’s overall direction, defines
-                  its long-term vision, and ensures that every department stays
-                  aligned with the organization’s mission, standards, and growth
-                  objectives.
+                  Ramy Elsaeed serves as the President, Co-Founder, Chief
+                  Executive Officer, and Chief Financial Officer of Eminence VA
+                  Solutions. As President, he leads the company’s overall
+                  direction, sets long-term priorities, and ensures every
+                  department remains aligned with the organization’s mission,
+                  standards, and growth goals.
                 </p>
 
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  As CEO, Ramy makes final executive decisions, oversees the
-                  leadership team, drives strategic partnerships, and represents
-                  the company in high-level business relationships. As CFO, he
-                  also oversees financial strategy, budgeting, planning, and
-                  fiscal accountability to ensure sustainable and responsible
-                  growth across the company.
+                  As Co-Founder, Ramy helped establish the company’s foundation,
+                  vision, and leadership structure. As Chief Executive Officer,
+                  he makes final executive decisions, oversees senior leadership,
+                  drives strategic partnerships, and represents the company in
+                  high-level business relationships. As Chief Financial Officer,
+                  he leads financial strategy, budgeting, planning, and fiscal
+                  accountability to support sustainable and responsible growth.
                 </p>
               </motion.div>
 
@@ -225,7 +226,7 @@ export default function AboutPage() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-200/20 to-cyan-100/20 blur-2xl" />
                 <img
                   src={ceoImage}
-                  alt="Ramy Elsaeed - President, CEO, and CFO of Eminence VA Solutions"
+                  alt="Ramy Elsaeed - President, Co-Founder, CEO, and CFO of Eminence VA Solutions"
                   className="relative mx-auto h-[520px] w-[420px] rounded-2xl border border-white/60 object-cover object-top shadow-xl"
                 />
               </motion.div>
@@ -251,14 +252,14 @@ export default function AboutPage() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-indigo-200/20 to-sky-100/20 blur-2xl" />
                 <img
                   src={amaniyImage}
-                  alt="Amaniy Ahmad - Vice President, CMO, and COO of Eminence VA Solutions"
+                  alt="Amaniy Ahmad - Vice President, Co-Founder, CMO, and COO of Eminence VA Solutions"
                   className="relative mx-auto h-[520px] w-[420px] rounded-2xl border border-white/60 object-cover object-top shadow-xl"
                 />
               </motion.div>
 
               <motion.div variants={fadeRight}>
                 <span className="mb-4 inline-flex items-center rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
-                  Vice President, CMO & COO
+                  Vice President, Co-Founder, CMO & COO
                 </span>
 
                 <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -266,8 +267,8 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="mt-6 leading-relaxed text-slate-600">
-                  Amaniy Ahmad serves as the Vice President, Chief Marketing
-                  Officer, and Chief Operations Officer of Eminence VA
+                  Amaniy Ahmad serves as the Vice President, Co-Founder, Chief
+                  Marketing Officer, and Chief Operations Officer of Eminence VA
                   Solutions. As Vice President, she supports executive
                   leadership, helps guide company-wide initiatives, and ensures
                   strategic priorities are translated into measurable action
@@ -275,12 +276,14 @@ export default function AboutPage() {
                 </p>
 
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  As CMO, Amaniy leads branding, marketing strategy, market
+                  As Co-Founder, Amaniy helped shape the company’s brand,
+                  structure, and long-term direction. As Chief Marketing
+                  Officer, she leads branding, marketing strategy, market
                   positioning, and client-facing growth efforts that strengthen
-                  visibility and acquisition. As COO, she oversees operational
-                  systems, workflow execution, internal coordination, and
-                  day-to-day performance to ensure the company delivers a smooth,
-                  efficient, and scalable client experience.
+                  visibility and acquisition. As Chief Operations Officer, she
+                  oversees operational systems, workflow execution, internal
+                  coordination, and day-to-day performance to ensure the company
+                  delivers a smooth, efficient, and scalable client experience.
                 </p>
               </motion.div>
             </div>
@@ -318,9 +321,10 @@ export default function AboutPage() {
                 <p className="mt-4 leading-relaxed text-slate-600">
                   As Social Media Director, Nico oversees content direction,
                   platform presence, digital engagement, and brand consistency
-                  across social channels. This role supports both business growth
-                  and market visibility by helping Eminence VA Solutions connect
-                  with the right audience and maintain a strong online presence.
+                  across social channels. This role supports both business
+                  growth and market visibility by helping Eminence VA Solutions
+                  connect with the right audience and maintain a strong online
+                  presence.
                 </p>
               </motion.div>
 

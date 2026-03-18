@@ -5,6 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import SchedulePage from "./pages/SchedulePage";
 import LoadingWithLogo from "./components/ui/LoadingWithLogo";
 import ThankYou from "./pages/ThankYou";
+import Faq from "./pages/Faq";
 export default function App() {
   const [appLoading, setAppLoading] = useState(true);
 
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/faq" element={<Faq />} />
           </Routes>
         </BrowserRouter>
       </div>
